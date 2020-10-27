@@ -8,8 +8,10 @@ export default function Homepage() {
   return (
     <View style={GeneralStyles.container}>
       <WelcomeView />
+      {/*
       <HomepageButton isDonateButton={false} />
       <HomepageButton isDonateButton={true} />
+      */}
     </View>
   );
 }

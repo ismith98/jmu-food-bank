@@ -6,29 +6,12 @@ import GeneralStyles from "../styles/GeneralStyles";
 
 export default function WelcomeView() {
   return (
-    <View style={styles.welcomeContainer}>
-      <ImageBackground source={foodBgImage} style={GeneralStyles.foodBg}>
+    <View>
+      <ImageBackground source={foodBgImage} style={GeneralStyles.container}>
         <WelcomeContent />
       </ImageBackground>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  welcomeContainer: {
-    height: 260,
-    width: "100%",
-    marginBottom: 15,
-
-    //box shadow
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    //for android
-    elevation: 5,
-  },
-});
+const styles = StyleSheet.create({});

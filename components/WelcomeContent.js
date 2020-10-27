@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 export default function WelcomeContent() {
   const navigation = useNavigation();
   function gotoFaqPage() {
-    navigation.navigate("Root", { screen: "Faq" });
+    navigation.navigate("Faq");
   }
 
   return (
@@ -14,8 +14,8 @@ export default function WelcomeContent() {
         <Text style={styles.welcomeText}>Welcome </Text>
         <Text style={styles.br}>{"\n\n"}</Text>
         <Text style={styles.bodyText}>
-          With this app you can see the current inventory of a local food bank,
-          and reserve food for a seamless pickup.
+          With this app you can see the current inventory of your local food
+          bank, and reserve food for pickup.
         </Text>
         <Text style={styles.br}>{"\n\n"}</Text>
         <Text onPress={gotoFaqPage} style={styles.faqText}>
@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
   textContainer: {
     color: "white",
     fontSize: 20,
+    //textAlign: "center",
   },
   container: {
     padding: 20,
