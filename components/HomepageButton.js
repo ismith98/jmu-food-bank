@@ -1,10 +1,18 @@
 import React from "react";
-import { StyleSheet, Text, TouchableHighlight, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableHighlight,
+  Image,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import GeneralStyles from "../styles/GeneralStyles";
 import donateFoodIcon from "../assets/welcomeScreenDonateFoodIcon.png";
 import reserveFoodIcon from "../assets/welcomeScreenReserveFoodIcon.png";
 
 export default function HomepageButton({ isDonateButton }) {
+  const navigation = useNavigation();
   function onPress() {
     isDonateButton ? gotoDonatePage() : gotoReservePage();
   }
@@ -14,7 +22,7 @@ export default function HomepageButton({ isDonateButton }) {
   }
 
   function gotoReservePage() {
-    console.log("goto Reserve page");
+    navigation.navigate("Root", { screen: "Reserve" });
   }
 
   return (
@@ -22,12 +30,14 @@ export default function HomepageButton({ isDonateButton }) {
       onPress={onPress}
       style={[GeneralStyles.buttonContainer, styles.homepageButton]}
     >
-      <Image
-        style={styles.icon}
-        source={isDonateButton ? donateFoodIcon : reserveFoodIcon}
-      />
+      <View>
+        <Image
+          style={styles.icon}
+          source={isDonateButton ? donateFoodIcon : reserveFoodIcon}
+        />
 
-      <Text>{isDonateButton ? "Donate Food" : "Reserve Food"}</Text>
+        <Text>{isDonateButton ? "Donate Food" : "Reserve Food"}</Text>
+      </View>
     </TouchableHighlight>
   );
 }

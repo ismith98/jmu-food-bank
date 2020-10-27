@@ -1,50 +1,34 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, ImageBackground, View } from "react-native";
+import foodBgImage from "../assets/background.png";
+import WelcomeContent from "../components/WelcomeContent";
+import GeneralStyles from "../styles/GeneralStyles";
 
 export default function WelcomeView() {
-  function gotoFaqPage() {
-    console.log("faq");
-  }
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.textContainer}>
-        <Text style={styles.welcomeText}>Welcome </Text>
-        <Text style={styles.br}>{"\n\n"}</Text>
-        <Text style={styles.bodyText}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-          malesuada tempor augue eget porttitor.
-        </Text>
-        <Text style={styles.br}>{"\n\n"}</Text>
-        <Text onPress={gotoFaqPage} style={styles.faqText}>
-          Questions? Visit FAQ {">>"}
-        </Text>
-      </Text>
+    <View style={styles.welcomeContainer}>
+      <ImageBackground source={foodBgImage} style={GeneralStyles.foodBg}>
+        <WelcomeContent />
+      </ImageBackground>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  textContainer: {
-    color: "white",
-    fontSize: 20,
-  },
-  container: {
-    padding: 20,
-    paddingTop: 40,
-    paddingLeft: 25,
-  },
-  welcomeText: {
-    fontSize: 40,
+  welcomeContainer: {
+    height: 260,
+    width: "100%",
     marginBottom: 15,
-  },
-  bodyText: {
-    marginBottom: 15,
-  },
-  faqText: {
-    textDecorationLine: "underline",
-  },
-  br: {
-    fontSize: 10,
+
+    //box shadow
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    //for android
+    elevation: 5,
   },
 });
