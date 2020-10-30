@@ -15,18 +15,18 @@ export default function App() {
   return (
     <NavigationContainer style={GeneralStyles.container}>
       <Tab.Navigator
-        initialRouteName="Faq"
+        initialRouteName="Home"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             switch (route.name) {
               case "Home":
                 return <Ionicons name="ios-home" size={size} color={color} />;
+              case "Reserve":
+                return <Ionicons name="ios-basket" size={size} color={color} />;
               case "Faq":
                 return (
                   <Ionicons name="ios-help-circle" size={size} color={color} />
                 );
-              case "Reserve":
-                return <Ionicons name="ios-basket" size={size} color={color} />;
               default:
                 return <Ionicons name="basket" size={size} color={color} />;
             }
@@ -37,8 +37,8 @@ export default function App() {
           inactiveTintColor: "gray",
         }}
       >
-        <Tab.Screen name="Home" component={Homepage} />
         <Tab.Screen name="Faq" component={Faq} />
+        <Tab.Screen name="Home" component={Homepage} />
         <Tab.Screen name="Reserve" component={Reserve} />
       </Tab.Navigator>
     </NavigationContainer>

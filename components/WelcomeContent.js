@@ -14,8 +14,8 @@ export default function WelcomeContent() {
         <Text style={styles.welcomeText}>Welcome </Text>
         <Text style={styles.br}>{"\n\n"}</Text>
         <Text style={styles.bodyText}>
-          With this app you can see the current inventory of your local food
-          bank, and reserve food for pickup.
+          To see the inventory of your local food bank, or to reserve food for
+          pickup, press Reserve
         </Text>
         <Text style={styles.br}>{"\n\n"}</Text>
         <Text onPress={gotoFaqPage} style={styles.faqText}>
