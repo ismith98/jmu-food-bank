@@ -15,4 +15,9 @@ export default function FoodBackground({ child, isDark = true }) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  fillScreen: {
+    width: "100%",
+    height: "100%",
+  },
+});
