@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    fontFamily: "sans-serif-medium",
+    fontFamily: "RobotoCondensed",
     fontWeight: "normal",
     color: "#fff",
     left: 16,

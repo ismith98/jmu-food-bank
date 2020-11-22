@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
   textContainer: {
     color: "white",
     fontSize: 20,
+    fontFamily: "RobotoCondensed",
     //textAlign: "center",
   },
   container: {

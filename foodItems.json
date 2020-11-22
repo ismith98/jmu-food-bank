@@ -1,0 +1,26 @@
+[
+  {
+    "_id": { "$oid": "5f8f7e0e367d3286f0d4d1b1" },
+    "item": "bread",
+    "amount": { "$numberInt": "25" },
+    "imageUrl": "https://i.imgur.com/c0JWUxd.jpg"
+  },
+  {
+    "_id": { "$oid": "5f8f8484367d3286f0d4d1b3" },
+    "item": "eggs",
+    "amount": { "$numberInt": "22" },
+    "imageUrl": "https://i.imgur.com/8ImQ9Uz.jpg"
+  },
+  {
+    "_id": { "$oid": "5f8f84d1367d3286f0d4d1b4" },
+    "item": "soup",
+    "amount": { "$numberInt": "20" },
+    "imageUrl": "https://i.imgur.com/nHLAnOQ.jpg"
+  },
+  {
+    "_id": { "$oid": "5f8f8514367d3286f0d4d1b5" },
+    "item": "fresh peas",
+    "amount": { "$numberInt": "18" },
+    "imageUrl": "https://i.imgur.com/pRTxIR3.jpg"
+  }
+]
