@@ -17,17 +17,18 @@ export default function UserList() {
   const [seed, setSeed] = useState(1);
   const [error, setError] = useState();
 
-  /*
   useEffect(() => {
     console.log("use effect");
     setLoading(true);
-    const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
+    const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=5`;
+    console.log(url);
     axios
       .get(url)
-      //.then((res) => {
+      /*.then((res) => {
         //res.json();
-        //console.log(res, "got response p1");
-      //})
+        console.log(res, "got response p1");
+        res.json();
+      })*/
       .then((res) => {
         console.log(res.data.results);
         console.log("got response p2");
@@ -43,11 +44,10 @@ export default function UserList() {
     return () => {
       //cleanup;
     };
-  }, []); 
-  */
+  }, []);
 
   function renderFooter() {
-    if (loading) return null;
+    if (!loading) return null;
 
     return (
       <View
@@ -70,7 +70,7 @@ export default function UserList() {
   return (
     <FlatList
       data={data}
-      keyExtractor={(item) => item.id}
+      keyExtractor={(item) => item.id.value}
       ListFooterComponent={renderFooter}
       renderItem={({ item }) => (
         <TouchableOpacity onPress={() => alert("Item pressed!")}>
