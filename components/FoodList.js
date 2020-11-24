@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  ActivityIndicator,
-} from "react-native";
+import { StyleSheet, View, FlatList, ActivityIndicator } from "react-native";
 import { SearchBar } from "react-native-elements";
 import FoodCard from "./FoodCard";
 import UserList from "./UserList";
@@ -15,12 +9,13 @@ export default function FoodList() {
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [foodItems, setFoodItems] = useState([]);
-  const [start, setStart] = useState(0);
+  const [filteredFoodItems, setFilteredFoodItems] = useState([]);
+  const [searchBarText, setSearchBarText] = useState("");
   var counter = 0;
+
   useEffect(() => {
     console.log("effect");
-    setStart(0);
-    getFoodItems(0);
+    getFoodItems();
     return () => {};
   }, []);
 
@@ -29,36 +24,45 @@ export default function FoodList() {
     counter = 0;
     setRefreshing(true);
     setFoodItems([]);
-    setStart(0);
-    let startAt = 0;
-    getFoodItems(startAt);
+    getFoodItems();
   }
 
-  function getFoodItems(startAt) {
+  function getFoodItems() {
     setLoading(true);
-    const NUMBER_OF_RESULTS = 10;
 
     const foodItemsRef = firebase.database().ref("foodItems/");
     foodItemsRef
       .orderByKey()
-      .limitToFirst(NUMBER_OF_RESULTS)
-      .startAt(`${startAt}`)
+      .startAt(`0`)
       .once("value", (snapshot) => {
         setLoading(false);
         setRefreshing(false);
-        console.log(start, startAt, counter);
+        console.log(counter);
         let value = snapshot.val();
         if (value !== null) {
           console.log("yes");
-          setFoodItems((prevItems) => prevItems.concat(Object.values(value)));
+          setFoodItems(Object.values(value));
+          setFilteredFoodItems(Object.values(value));
         }
-        counter += NUMBER_OF_RESULTS + 3;
-        setStart(startAt + NUMBER_OF_RESULTS + 3);
+        counter += 3;
       });
   }
 
   function renderHeader() {
-    return <SearchBar placeholder="type here..." lightTheme round />;
+    return (
+      <SearchBar
+        onChangeText={filterItems}
+        value={searchBarText}
+        placeholder="type here..."
+        lightTheme
+        round
+      />
+    );
+  }
+
+  function filterItems(text) {
+    setSearchBarText(text);
+    setFilteredFoodItems(foodItems.filter((item) => item.name.includes(text)));
   }
 
   function renderFooter() {
@@ -83,14 +87,12 @@ export default function FoodList() {
       {/*<UserList />*/}
 
       <FlatList
-        data={foodItems}
+        data={filteredFoodItems}
         keyExtractor={({ index }) => index}
         ListHeaderComponent={renderHeader}
         ListFooterComponent={renderFooter}
         refreshing={refreshing}
         onRefresh={handleRefresh}
-        onEndReached={() => getFoodItems(start)}
-        onEndReachedThreshold={0.4}
         renderItem={({ item, index }) => (
           <FoodCard foodItem={item} key={index} />
         )}
