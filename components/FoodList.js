@@ -1,26 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
+import { SearchBar } from "react-native-elements";
 import FoodCard from "./FoodCard";
-//import foodItems from "../foodItems.json";
 import UserList from "./UserList";
 import firebase from "../firebase";
 
 export default function FoodList() {
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [foodItems, setFoodItems] = useState([]);
   const [start, setStart] = useState(0);
-
+  var counter = 0;
   useEffect(() => {
     console.log("effect");
     setStart(0);
     getFoodItems(0);
-    //setLoading(true)
     return () => {};
   }, []);
 
   function handleRefresh() {
     console.log("refresh");
-
+    counter = 0;
+    setRefreshing(true);
     setFoodItems([]);
     setStart(0);
     let startAt = 0;
@@ -29,7 +36,7 @@ export default function FoodList() {
 
   function getFoodItems(startAt) {
     setLoading(true);
-    const NUMBER_OF_RESULTS = 6;
+    const NUMBER_OF_RESULTS = 10;
 
     const foodItemsRef = firebase.database().ref("foodItems/");
     foodItemsRef
@@ -38,36 +45,20 @@ export default function FoodList() {
       .startAt(`${startAt}`)
       .once("value", (snapshot) => {
         setLoading(false);
-        console.log(start, startAt);
+        setRefreshing(false);
+        console.log(start, startAt, counter);
         let value = snapshot.val();
         if (value !== null) {
           console.log("yes");
-          setFoodItems((prevItems) =>
-            //prevItems.concat(Object.values(snapshot.val()))
-            prevItems.concat(Object.values(value))
-          );
-          /*
-          foodItems.length
-            ? setFoodItems((prevItems) =>
-                prevItems.concat(Object.values(snapshot.val()))
-              )
-            : setFoodItems((prevItems) =>
-                prevItems.concat(Object.values(snapshot.val()))
-              );
-          /*
-          setFoodItems((prevItems) => {
-            prevItems.concat(Object.values(value));
-          });
-          */
+          setFoodItems((prevItems) => prevItems.concat(Object.values(value)));
         }
-        /*
-        startAt === 0
-          ? setFoodItems(Object.values(snapshot.val()))
-          : setFoodItems(foodItems.concat( Object.values(snapshot.val())));
-          */
-        //startAt++;
+        counter += NUMBER_OF_RESULTS + 3;
         setStart(startAt + NUMBER_OF_RESULTS + 3);
       });
+  }
+
+  function renderHeader() {
+    return <SearchBar placeholder="type here..." lightTheme round />;
   }
 
   function renderFooter() {
@@ -81,7 +72,7 @@ export default function FoodList() {
             borderColor: "#CED0CE",
           }}
         >
-          <ActivityIndicator animating size="large" />
+          <ActivityIndicator size="large" />
         </View>
       );
     }
@@ -94,8 +85,9 @@ export default function FoodList() {
       <FlatList
         data={foodItems}
         keyExtractor={({ index }) => index}
-        //ListFooterComponent={renderFooter}
-        refreshing={loading}
+        ListHeaderComponent={renderHeader}
+        ListFooterComponent={renderFooter}
+        refreshing={refreshing}
         onRefresh={handleRefresh}
         onEndReached={() => getFoodItems(start)}
         onEndReachedThreshold={0.4}
@@ -106,11 +98,5 @@ export default function FoodList() {
     </View>
   );
 }
-/*
-        data={foodItems}
-        keyExtractor={({ foodItem }) => foodItem.item}
-        renderItem={({ foodItem }) => (
-          <FoodCard foodItem={foodItem} key={foodItem.item} />
-        )*/
 
 const styles = StyleSheet.create({});
