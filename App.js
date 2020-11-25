@@ -11,6 +11,7 @@ import Homepage from "./pages/Homepage";
 import Cart from "./pages/Cart";
 import { useFonts } from "expo-font";
 import { AppLoading } from "expo";
+import { CartProvider } from "./contexts/CartContext";
 
 const customFonts = {
   RobotoCondensed: require("./fonts/RobotoCondensed-Regular.ttf"),
@@ -25,44 +26,50 @@ export default function App() {
 
   if (isLoaded) {
     return (
-      <NavigationContainer style={GeneralStyles.container}>
-        <Tab.Navigator
-          initialRouteName="Home"
-          screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
-              switch (route.name) {
-                case "Home":
-                  return <Ionicons name="ios-home" size={size} color={color} />;
-                case "Cart":
-                  return <Ionicons name="ios-cart" size={size} color={color} />;
-                case "Reserve":
-                  return (
-                    <Ionicons name="ios-basket" size={size} color={color} />
-                  );
-                case "Faq":
-                  return (
-                    <Ionicons
-                      name="ios-help-circle"
-                      size={size}
-                      color={color}
-                    />
-                  );
-                default:
-                  return <Ionicons name="basket" size={size} color={color} />;
-              }
-            },
-          })}
-          tabBarOptions={{
-            activeTintColor: "#450084",
-            inactiveTintColor: "gray",
-          }}
-        >
-          <Tab.Screen name="Faq" component={Faq} />
-          <Tab.Screen name="Home" component={Homepage} />
-          <Tab.Screen name="Reserve" component={Reserve} />
-          <Tab.Screen name="Cart" component={Cart} />
-        </Tab.Navigator>
-      </NavigationContainer>
+      <CartProvider>
+        <NavigationContainer style={GeneralStyles.container}>
+          <Tab.Navigator
+            initialRouteName="Home"
+            screenOptions={({ route }) => ({
+              tabBarIcon: ({ focused, color, size }) => {
+                switch (route.name) {
+                  case "Home":
+                    return (
+                      <Ionicons name="ios-home" size={size} color={color} />
+                    );
+                  case "Cart":
+                    return (
+                      <Ionicons name="ios-cart" size={size} color={color} />
+                    );
+                  case "Reserve":
+                    return (
+                      <Ionicons name="ios-basket" size={size} color={color} />
+                    );
+                  case "Faq":
+                    return (
+                      <Ionicons
+                        name="ios-help-circle"
+                        size={size}
+                        color={color}
+                      />
+                    );
+                  default:
+                    return <Ionicons name="basket" size={size} color={color} />;
+                }
+              },
+            })}
+            tabBarOptions={{
+              activeTintColor: "#450084",
+              inactiveTintColor: "gray",
+            }}
+          >
+            <Tab.Screen name="Faq" component={Faq} />
+            <Tab.Screen name="Home" component={Homepage} />
+            <Tab.Screen name="Reserve" component={Reserve} />
+            <Tab.Screen name="Cart" component={Cart} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </CartProvider>
     );
   } else {
     return <AppLoading />;

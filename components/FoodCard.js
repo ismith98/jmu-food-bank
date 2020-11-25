@@ -1,36 +1,96 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import NumericInput from "react-native-numeric-input";
+import { useCart } from "../contexts/CartContext";
 
 //console.log(foodItems[0].imageUrl);
 //const path = require("https://i.imgur.com/c0JWUxd.jpg");
-export default function FoodCard({ foodItem, setFoodItems }) {
+export default function FoodCard({ currentItem, setFoodItems }) {
   const startingInventoryAmount =
-    foodItem.totalInventory - foodItem.amountReserved;
+    currentItem.totalInventory - currentItem.amountReserved;
   const [amountInCart, setAmountInCart] = useState(0);
   const [availableInventory, setAvailableInventory] = useState(
     startingInventoryAmount
   );
+  const { itemsInCart, setItemsInCart } = useCart();
+  const [isInCart, setIsInCart] = useState(false);
+
+  useEffect(() => {
+    let itemInCart = checkIfAlreadyInCart();
+    if (itemInCart) {
+      console.log("effect to update item", itemInCart);
+      setAmountInCart(itemInCart.amount);
+      setIsInCart(true);
+    }
+    return () => {};
+  }, []);
 
   function addItemToCart(value) {
-    setFoodItems((prevFoodItems) => {
+    /*setFoodItems((prevFoodItems) => {
       let prevItems = [...prevFoodItems];
       return prevItems.map((prevItem) => {
-        if (prevItem.name === foodItem.name) {
+        if (prevItem.name === currentItem.name) {
           prevItem.amountInCart += 1;
         }
         return prevItem;
       });
-    });
+    });*/
     setAmountInCart(value);
     setAvailableInventory(startingInventoryAmount - value);
+    if (value === 0) {
+      removeItemFromCart();
+    } else if (isInCart) {
+      replaceAmountInCart(value);
+    } else {
+      addItemToCartContext(value);
+    }
+  }
+
+  function removeItemFromCart() {
+    setItemsInCart((prevItems) =>
+      prevItems.filter((item) => item.name !== currentItem.name)
+    );
+    setIsInCart(false);
+  }
+
+  function replaceAmountInCart(value) {
+    setItemsInCart((prevItems) =>
+      prevItems.map((item) => {
+        if (item.name === currentItem.name) {
+          item.amount = value;
+        }
+        return item;
+      })
+    );
+  }
+
+  function addItemToCartContext(value) {
+    setItemsInCart((prevItems) => [
+      ...prevItems,
+      { name: currentItem.name, amount: value },
+    ]);
+    setIsInCart(true);
+  }
+
+  function checkIfAlreadyInCart() {
+    if (itemsInCart.length > 0) {
+      let itemInCart = itemsInCart.filter(
+        (item) => item.name === currentItem.name
+      );
+      if (itemInCart) {
+        setIsInCart(true);
+      }
+      return itemInCart;
+    } else {
+      return null;
+    }
   }
 
   return (
     <View style={styles.card}>
-      <Image source={{ uri: foodItem.imageUrl }} style={styles.image} />
+      <Image source={{ uri: currentItem.imageUrl }} style={styles.image} />
       <View style={styles.itemInfo}>
-        <Text style={styles.name}>{foodItem.name}</Text>
+        <Text style={styles.name}>{currentItem.name}</Text>
         <View style={styles.addToCartContainer}>
           <View style={styles.addToCartLabel}>
             <Text style={styles.addToCartText}>Add to Cart</Text>

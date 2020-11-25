@@ -107,7 +107,11 @@ export default function FoodList() {
         refreshing={refreshing}
         onRefresh={handleRefresh}
         renderItem={({ item, index }) => (
-          <FoodCard foodItem={item} key={index} setFoodItems={setFoodItems} />
+          <FoodCard
+            currentItem={item}
+            key={index}
+            setFoodItems={setFoodItems}
+          />
         )}
       />
     </View>
