@@ -48,21 +48,13 @@ export default function FoodList() {
       });
   }
 
-  function renderHeader() {
-    return (
-      <SearchBar
-        onChangeText={filterItems}
-        value={searchBarText}
-        placeholder="type here..."
-        lightTheme
-        round
-      />
-    );
-  }
-
   function filterItems(text) {
     setSearchBarText(text);
-    setFilteredFoodItems(foodItems.filter((item) => item.name.includes(text)));
+    let filteredItems = foodItems.filter((item) => {
+      let name = item.name.toLowerCase();
+      return name.includes(text.toLowerCase());
+    });
+    setFilteredFoodItems(filteredItems);
   }
 
   function renderFooter() {
@@ -85,11 +77,17 @@ export default function FoodList() {
   return (
     <View style={{ flex: 1, width: "100%" }}>
       {/*<UserList />*/}
-
+      <SearchBar
+        onChangeText={filterItems}
+        value={searchBarText}
+        placeholder="type here..."
+        platform="ios"
+        lightTheme
+        round
+      />
       <FlatList
         data={filteredFoodItems}
         keyExtractor={({ index }) => index}
-        ListHeaderComponent={renderHeader}
         ListFooterComponent={renderFooter}
         refreshing={refreshing}
         onRefresh={handleRefresh}

@@ -8,6 +8,10 @@ export default function WelcomeContent() {
     navigation.navigate("Faq");
   }
 
+  function gotoReservePage() {
+    navigation.navigate("Reserve");
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.textContainer}>
@@ -15,10 +19,13 @@ export default function WelcomeContent() {
         <Text style={styles.br}>{"\n\n"}</Text>
         <Text style={styles.bodyText}>
           To see the inventory of your local food bank, or to reserve food for
-          pickup, press Reserve
+          pickup, press{" "}
+          <Text onPress={gotoReservePage} style={styles.underline}>
+            Reserve
+          </Text>
         </Text>
         <Text style={styles.br}>{"\n\n"}</Text>
-        <Text onPress={gotoFaqPage} style={styles.faqText}>
+        <Text onPress={gotoFaqPage} style={styles.underline}>
           Questions? Visit FAQ {">>"}
         </Text>
       </Text>
@@ -45,7 +52,7 @@ const styles = StyleSheet.create({
   bodyText: {
     marginBottom: 15,
   },
-  faqText: {
+  underline: {
     textDecorationLine: "underline",
   },
   br: {
