@@ -11,7 +11,6 @@ export default function FoodList() {
   const [foodItems, setFoodItems] = useState([]);
   const [filteredFoodItems, setFilteredFoodItems] = useState([]);
   const [searchBarText, setSearchBarText] = useState("");
-  var counter = 0;
 
   useEffect(() => {
     console.log("effect");
@@ -21,7 +20,6 @@ export default function FoodList() {
 
   function handleRefresh() {
     console.log("refresh");
-    counter = 0;
     setRefreshing(true);
     setFoodItems([]);
     getFoodItems();
@@ -37,14 +35,12 @@ export default function FoodList() {
       .once("value", (snapshot) => {
         setLoading(false);
         setRefreshing(false);
-        console.log(counter);
         let value = snapshot.val();
         if (value !== null) {
           console.log("yes");
           setFoodItems(Object.values(value));
           setFilteredFoodItems(Object.values(value));
         }
-        counter += 3;
       });
   }
 
