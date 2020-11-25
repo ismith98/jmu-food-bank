@@ -4,7 +4,7 @@ import NumericInput from "react-native-numeric-input";
 
 //console.log(foodItems[0].imageUrl);
 //const path = require("https://i.imgur.com/c0JWUxd.jpg");
-export default function FoodCard({ foodItem }) {
+export default function FoodCard({ foodItem, setFoodItems }) {
   const startingInventoryAmount =
     foodItem.totalInventory - foodItem.amountReserved;
   const [amountInCart, setAmountInCart] = useState(0);
@@ -13,6 +13,15 @@ export default function FoodCard({ foodItem }) {
   );
 
   function addItemToCart(value) {
+    setFoodItems((prevFoodItems) => {
+      let prevItems = [...prevFoodItems];
+      return prevItems.map((prevItem) => {
+        if (prevItem.name === foodItem.name) {
+          prevItem.amountInCart += 1;
+        }
+        return prevItem;
+      });
+    });
     setAmountInCart(value);
     setAvailableInventory(startingInventoryAmount - value);
   }

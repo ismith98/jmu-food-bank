@@ -8,6 +8,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Faq from "./pages/Faq";
 import Reserve from "./pages/Reserve";
 import Homepage from "./pages/Homepage";
+import Cart from "./pages/Cart";
 import { useFonts } from "expo-font";
 import { AppLoading } from "expo";
 
@@ -32,6 +33,8 @@ export default function App() {
               switch (route.name) {
                 case "Home":
                   return <Ionicons name="ios-home" size={size} color={color} />;
+                case "Cart":
+                  return <Ionicons name="ios-cart" size={size} color={color} />;
                 case "Reserve":
                   return (
                     <Ionicons name="ios-basket" size={size} color={color} />
@@ -57,6 +60,7 @@ export default function App() {
           <Tab.Screen name="Faq" component={Faq} />
           <Tab.Screen name="Home" component={Homepage} />
           <Tab.Screen name="Reserve" component={Reserve} />
+          <Tab.Screen name="Cart" component={Cart} />
         </Tab.Navigator>
       </NavigationContainer>
     );

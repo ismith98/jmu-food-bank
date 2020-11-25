@@ -1,17 +1,16 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
-import FoodList from "../components/FoodList";
+import CartList from "../components/CartList";
 import FoodBackground from "../components/FoodBackground";
 import MyHeader from "../components/MyHeader";
 
-export default function Reserve({ navigation }) {
+export default function Cart() {
   return (
     <View style={{ flex: 1 }}>
-      <MyHeader title={"Reserve Food"} />
+      <MyHeader title={"My Cart"} />
 
       <View style={styles.body}>
-        <FoodBackground isDark={false} child={<FoodList />} />
+        <FoodBackground isDark={false} child={<CartList />} />
       </View>
     </View>
   );

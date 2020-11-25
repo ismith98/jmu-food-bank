@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View, FlatList, ActivityIndicator } from "react-native";
 import { SearchBar } from "react-native-elements";
 import FoodCard from "./FoodCard";
-import UserList from "./UserList";
 import firebase from "../firebase";
 
 export default function FoodList() {
@@ -18,8 +17,13 @@ export default function FoodList() {
     return () => {};
   }, []);
 
+  useEffect(() => {
+    console.log(foodItems[0]);
+    return () => {};
+  }, [foodItems]);
+
   function handleRefresh() {
-    console.log("refresh");
+    console.log("refresh", foodItems[0].name, foodItems[0].amountInCart);
     setRefreshing(true);
     setFoodItems([]);
     getFoodItems();
@@ -34,13 +38,28 @@ export default function FoodList() {
       .startAt(`0`)
       .once("value", (snapshot) => {
         setLoading(false);
-        setRefreshing(false);
+
         let value = snapshot.val();
         if (value !== null) {
           console.log("yes");
-          setFoodItems(Object.values(value));
-          setFilteredFoodItems(Object.values(value));
+          let items = Object.values(value);
+
+          if (!refreshing) {
+            setFoodItems(items.map((item) => (item.amountInCart = 0)));
+          } else {
+            setFoodItems((prevFoodItems) => {
+              let prevItems = [...prevFoodItems];
+              return items.map((item) => {
+                prevItems.includes((prevItem) => prevItem.name === item.name)
+                  ? (item.amountInCart = 0)
+                  : (item.amountInCart = prevItem.amountInCart);
+              });
+            });
+          }
+          setFoodItems(items);
+          setFilteredFoodItems(items);
         }
+        setRefreshing(false);
       });
   }
 
@@ -76,7 +95,7 @@ export default function FoodList() {
       <SearchBar
         onChangeText={filterItems}
         value={searchBarText}
-        placeholder="type here..."
+        placeholder="Search for food"
         platform="ios"
         lightTheme
         round
@@ -88,7 +107,7 @@ export default function FoodList() {
         refreshing={refreshing}
         onRefresh={handleRefresh}
         renderItem={({ item, index }) => (
-          <FoodCard foodItem={item} key={index} />
+          <FoodCard foodItem={item} key={index} setFoodItems={setFoodItems} />
         )}
       />
     </View>
