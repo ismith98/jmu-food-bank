@@ -81,7 +81,7 @@ export default function FoodCardInCart({ currentItem, index }) {
   );
 }
 
-FoodCardInCart.PropTypes = {
+FoodCardInCart.propTypes = {
   currentItem: PropTypes.shape({
     name: PropTypes.string,
     imageUrl: PropTypes.string,

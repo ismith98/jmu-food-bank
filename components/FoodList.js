@@ -3,6 +3,7 @@ import { StyleSheet, View, FlatList, ActivityIndicator } from "react-native";
 import { SearchBar } from "react-native-elements";
 import FoodCard from "./FoodCard";
 import firebase from "../firebase";
+import useUpdateLogger from "../hooks/useUpdateLogger";
 
 export default function FoodList() {
   const [loading, setLoading] = useState(false);
@@ -10,6 +11,8 @@ export default function FoodList() {
   const [foodItems, setFoodItems] = useState([]);
   const [filteredFoodItems, setFilteredFoodItems] = useState([]);
   const [searchBarText, setSearchBarText] = useState("");
+  useUpdateLogger(foodItems);
+  //useUpdateLogger(filteredFoodItems);
 
   useEffect(() => {
     getFoodItems();
@@ -37,7 +40,7 @@ export default function FoodList() {
         if (value !== null) {
           console.log("yes");
           let items = Object.values(value);
-
+          /*
           if (!refreshing) {
             setFoodItems(items.map((item) => (item.amountInCart = 0)));
           } else {
@@ -50,6 +53,7 @@ export default function FoodList() {
               });
             });
           }
+          */
           setFoodItems(items);
           setFilteredFoodItems(items);
         }

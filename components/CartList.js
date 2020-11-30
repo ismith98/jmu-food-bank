@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, FlatList, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TouchableHighlight,
+} from "react-native";
 import { SearchBar } from "react-native-elements";
 import { useCart } from "../contexts/CartContext";
 import FoodCardInCart from "./FoodCardInCart";
@@ -28,35 +34,18 @@ export default function CartList() {
         round
       />
       {cartTotal > 0 ? (
-        /*<FlatList
-          data={itemsInCart}
-          keyExtractor={({ index }) => index}
-          refreshing={refreshing}
-          renderItem={({ item, index }) => (
-            <FoodCardInCart
-              currentItem={item}
-              key={index}
-              count={remountCount}
-            />
-          )}
-        />*/
-        /*
-        <ScrollView>
-          {Array(cartTotal)
-            .fill(0)
-            .map((item, index) => {
-              //<FoodCardInCart currentItem={itemsInCart[index]} key={index} />
-              console.log(itemsInCart[index]);
-              return index < itemsInCart.length ? (
-                <FoodCardInCart currentItem={itemsInCart[index]} key={index} />
-              ) : null;
-            })}
-        </ScrollView>*/
-        <ScrollView>
-          {itemsInCart.map((item, index) => (
-            <FoodCardInCart currentItem={item} key={index} index={index} />
-          ))}
-        </ScrollView>
+        <>
+          <ScrollView>
+            {itemsInCart.map((item, index) => (
+              <FoodCardInCart currentItem={item} key={index} index={index} />
+            ))}
+          </ScrollView>
+          <TouchableHighlight onPress={() => console.log("press")}>
+            <View style={styles.button}>
+              <Text style={styles.buttonText}>Continue</Text>
+            </View>
+          </TouchableHighlight>
+        </>
       ) : (
         <View style={styles.emptyCartView}>
           <Text style={styles.emptyCartText}>
@@ -78,5 +67,20 @@ const styles = StyleSheet.create({
   emptyCartText: {
     fontFamily: "Roboto",
     fontSize: 16,
+  },
+  button: {
+    backgroundColor: "#CBB677",
+    height: 40,
+    //flex: 1,
+    alignContent: "center",
+    justifyContent: "center",
+    margin: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: "white",
+    textAlign: "center",
+    fontFamily: "Roboto",
+    fontSize: 20,
   },
 });

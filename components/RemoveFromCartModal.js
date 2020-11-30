@@ -6,6 +6,7 @@ import {
   Modal,
   TouchableHighlight,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function RemoveFromCartModal({
   modalVisible,
@@ -24,12 +25,13 @@ export default function RemoveFromCartModal({
     <Modal animationType="slide" transparent={true} visible={modalVisible}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
+          <Ionicons name="ios-warning" size={36} color="#450084" />
           <Text style={styles.modalText}>
             Are you sure you want to continue?
           </Text>
 
           <TouchableHighlight
-            style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+            style={{ ...styles.button, ...styles.deleteButton }}
             onPress={() => {
               removeItemFromCart();
               setModalVisible(!modalVisible);
@@ -37,11 +39,10 @@ export default function RemoveFromCartModal({
           >
             <Text style={styles.textStyle}>Yes, delete the item</Text>
           </TouchableHighlight>
+
           <TouchableHighlight
-            style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-            onPress={() => {
-              setModalVisible(!modalVisible);
-            }}
+            style={{ ...styles.button, ...styles.returnButton }}
+            onPress={() => setModalVisible(!modalVisible)}
           >
             <Text style={styles.textStyle}>No, take me back</Text>
           </TouchableHighlight>
@@ -73,11 +74,17 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  openButton: {
-    backgroundColor: "#F194FF",
+  button: {
     borderRadius: 20,
     padding: 10,
     elevation: 2,
+  },
+  deleteButton: {
+    backgroundColor: "#5800A8",
+    marginBottom: 10,
+  },
+  returnButton: {
+    backgroundColor: "#6c757d",
   },
   textStyle: {
     color: "white",
@@ -85,7 +92,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   modalText: {
+    marginTop: 5,
     marginBottom: 15,
     textAlign: "center",
   },
 });
+//backgroundColor: "#2196F3"
