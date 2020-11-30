@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import NumericInput from "react-native-numeric-input";
 import { useCart } from "../contexts/CartContext";
+import NumberInput from "./NumberInput";
 
 //console.log(foodItems[0].imageUrl);
 //const path = require("https://i.imgur.com/c0JWUxd.jpg");
-export default function FoodCard({ currentItem, setFoodItems }) {
+export default function FoodCard({ currentItem }) {
   const startingInventoryAmount =
     currentItem.totalInventory - currentItem.amountReserved;
   const [amountInCart, setAmountInCart] = useState(0);
   const [availableInventory, setAvailableInventory] = useState(
     startingInventoryAmount
   );
-  const { itemsInCart, setItemsInCart } = useCart();
+  const { itemsInCart, setItemsInCart, setCartTotal } = useCart();
   const [isInCart, setIsInCart] = useState(false);
 
   useEffect(() => {
     let itemInCart = checkIfAlreadyInCart();
     if (itemInCart) {
-      console.log("effect to update item", itemInCart);
       setAmountInCart(itemInCart.amount);
       setIsInCart(true);
     }
@@ -26,34 +25,31 @@ export default function FoodCard({ currentItem, setFoodItems }) {
   }, []);
 
   function addItemToCart(value) {
-    /*setFoodItems((prevFoodItems) => {
-      let prevItems = [...prevFoodItems];
-      return prevItems.map((prevItem) => {
-        if (prevItem.name === currentItem.name) {
-          prevItem.amountInCart += 1;
-        }
-        return prevItem;
-      });
-    });*/
-    setAmountInCart(value);
+    var prevAmountInCart = 0;
+    setAmountInCart((prevAmount) => {
+      prevAmountInCart = prevAmount;
+      return value;
+    });
     setAvailableInventory(startingInventoryAmount - value);
+    let difference = value - prevAmountInCart;
     if (value === 0) {
-      removeItemFromCart();
+      removeItemFromCart(difference);
     } else if (isInCart) {
-      replaceAmountInCart(value);
+      replaceAmountInCart(value, difference);
     } else {
-      addItemToCartContext(value);
+      addItemToCartContext(value, difference);
     }
   }
 
-  function removeItemFromCart() {
+  function removeItemFromCart(difference) {
+    setIsInCart(false);
     setItemsInCart((prevItems) =>
       prevItems.filter((item) => item.name !== currentItem.name)
     );
-    setIsInCart(false);
+    setCartTotal((prevTotal) => prevTotal + difference);
   }
 
-  function replaceAmountInCart(value) {
+  function replaceAmountInCart(value, difference) {
     setItemsInCart((prevItems) =>
       prevItems.map((item) => {
         if (item.name === currentItem.name) {
@@ -62,14 +58,16 @@ export default function FoodCard({ currentItem, setFoodItems }) {
         return item;
       })
     );
+    setCartTotal((prevTotal) => prevTotal + difference);
   }
 
-  function addItemToCartContext(value) {
+  function addItemToCartContext(value, difference) {
+    setIsInCart(true);
     setItemsInCart((prevItems) => [
       ...prevItems,
-      { name: currentItem.name, amount: value },
+      { name: currentItem.name, amount: value, imageUrl: currentItem.imageUrl },
     ]);
-    setIsInCart(true);
+    setCartTotal((prevTotal) => prevTotal + difference);
   }
 
   function checkIfAlreadyInCart() {
@@ -93,16 +91,12 @@ export default function FoodCard({ currentItem, setFoodItems }) {
         <Text style={styles.name}>{currentItem.name}</Text>
         <View style={styles.addToCartContainer}>
           <View style={styles.addToCartLabel}>
-            <Text style={styles.addToCartText}>Add to Cart</Text>
+            <Text style={styles.addToCartText}>Amount in Cart</Text>
           </View>
-          <View style={{ backgroundColor: "#5800A8", borderWidth: 0 }}>
-            <NumericInput
+          <View style={styles.numberInputContainer}>
+            <NumberInput
               value={amountInCart}
-              minValue={0}
-              totalWidth={60}
-              textColor={"white"}
-              //type={"up-down"}
-              onChange={(value) => addItemToCart(value)}
+              onChangeValue={(value) => addItemToCart(value)}
             />
           </View>
         </View>
@@ -158,6 +152,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     flexDirection: "row",
     backgroundColor: "#450084",
+  },
+  numberInputContainer: {
+    backgroundColor: "#5800A8",
+    borderColor: "#5800A8",
+    borderWidth: 1,
+    borderRadius: 5,
   },
   addToCartLabel: {
     flex: 1,

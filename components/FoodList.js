@@ -12,15 +12,9 @@ export default function FoodList() {
   const [searchBarText, setSearchBarText] = useState("");
 
   useEffect(() => {
-    console.log("effect");
     getFoodItems();
     return () => {};
   }, []);
-
-  useEffect(() => {
-    console.log(foodItems[0]);
-    return () => {};
-  }, [foodItems]);
 
   function handleRefresh() {
     console.log("refresh", foodItems[0].name, foodItems[0].amountInCart);
@@ -107,11 +101,7 @@ export default function FoodList() {
         refreshing={refreshing}
         onRefresh={handleRefresh}
         renderItem={({ item, index }) => (
-          <FoodCard
-            currentItem={item}
-            key={index}
-            setFoodItems={setFoodItems}
-          />
+          <FoodCard currentItem={item} key={index} />
         )}
       />
     </View>

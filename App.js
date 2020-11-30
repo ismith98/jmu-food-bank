@@ -11,7 +11,7 @@ import Homepage from "./pages/Homepage";
 import Cart from "./pages/Cart";
 import { useFonts } from "expo-font";
 import { AppLoading } from "expo";
-import { CartProvider } from "./contexts/CartContext";
+import { CartProvider, useCart } from "./contexts/CartContext";
 
 const customFonts = {
   RobotoCondensed: require("./fonts/RobotoCondensed-Regular.ttf"),
@@ -29,7 +29,9 @@ export default function App() {
       <CartProvider>
         <NavigationContainer style={GeneralStyles.container}>
           <Tab.Navigator
-            initialRouteName="Home"
+            initialRouteName="Cart"
+            //If you go straight to the homescreen,
+            //the badges for the cart won't show until you click on the cart page
             screenOptions={({ route }) => ({
               tabBarIcon: ({ focused, color, size }) => {
                 switch (route.name) {
@@ -77,3 +79,16 @@ export default function App() {
 }
 
 //<StatusBar style="auto" />
+
+/*
+              options={() => {
+                const { cartTotal } = useCart();
+                return cartTotal > 0
+                  ? {
+                      tabBarBadge: cartTotal,
+                      //activeTintColor: "#450084",
+                      tabBarBadgeStyle: { backgroundColor: "#450084" },
+                    }
+                  : null;
+              }}
+            */
