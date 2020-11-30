@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableHighlight,
+} from "react-native";
 import PropTypes from "prop-types";
 import { FontAwesome } from "@expo/vector-icons";
-import NumericInput from "react-native-numeric-input";
 import { useCart } from "../contexts/CartContext";
 import NumberInput from "./NumberInput";
+import RemoveFromCartModal from "./RemoveFromCartModal";
 
 export default function FoodCardInCart({ currentItem, index }) {
-  const { itemsInCart, setItemsInCart } = useCart();
+  const { itemsInCart, setItemsInCart, setCartTotal } = useCart();
   const [quantity, setQuantity] = useState(itemsInCart[index].amount);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     setQuantity(itemsInCart[index].amount);
@@ -16,7 +23,25 @@ export default function FoodCardInCart({ currentItem, index }) {
   }, [itemsInCart]);
 
   function changeValueInCart(value) {
-    setQuantity(value);
+    var prevAmountInCart = 0;
+    setQuantity((prevAmount) => {
+      prevAmountInCart = prevAmount;
+      return value;
+    });
+    let difference = value - prevAmountInCart;
+    replaceAmountInCart(value, difference);
+  }
+
+  function replaceAmountInCart(value, difference) {
+    setItemsInCart((prevItems) =>
+      prevItems.map((item) => {
+        if (item.name === currentItem.name) {
+          item.amount = value;
+        }
+        return item;
+      })
+    );
+    setCartTotal((prevTotal) => prevTotal + difference);
   }
 
   return (
@@ -29,24 +54,29 @@ export default function FoodCardInCart({ currentItem, index }) {
             <Text style={styles.addToCartText}>Quantity</Text>
           </View>
           <View style={styles.numberInputContainer}>
-            {/*<NumericInput
+            <NumberInput
               value={quantity}
+              onChangeValue={changeValueInCart}
               minValue={1}
-              totalWidth={60}
-              textColor={"white"}
-              //type={"up-down"}
-              onChange={(value) => changeValueInCart(value)}
-            />*/}
-            <NumberInput value={quantity} onChangeValue={changeValueInCart} />
+            />
           </View>
         </View>
       </View>
-      <View style={styles.removeView}>
-        <View style={styles.centerInventory}>
-          <FontAwesome name="trash-o" size={24} color="black" />
-          <Text style={styles.removeText}>Remove</Text>
+      <TouchableHighlight onPress={() => setModalVisible(true)}>
+        <View style={styles.removeView}>
+          <View style={styles.centerInventory}>
+            <FontAwesome name="trash-o" size={24} color="black" />
+            <Text style={styles.removeText}>Remove</Text>
+          </View>
         </View>
-      </View>
+      </TouchableHighlight>
+      <RemoveFromCartModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        setCartTotal={setCartTotal}
+        setItemsInCart={setItemsInCart}
+        currentItem={currentItem}
+      />
     </View>
   );
 }

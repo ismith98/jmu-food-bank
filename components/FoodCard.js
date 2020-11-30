@@ -8,7 +8,7 @@ import NumberInput from "./NumberInput";
 export default function FoodCard({ currentItem }) {
   const startingInventoryAmount =
     currentItem.totalInventory - currentItem.amountReserved;
-  const [amountInCart, setAmountInCart] = useState(0);
+  const [quantity, setQuantity] = useState(0);
   const [availableInventory, setAvailableInventory] = useState(
     startingInventoryAmount
   );
@@ -16,17 +16,21 @@ export default function FoodCard({ currentItem }) {
   const [isInCart, setIsInCart] = useState(false);
 
   useEffect(() => {
+    //console.log("is items in cart");
     let itemInCart = checkIfAlreadyInCart();
     if (itemInCart) {
-      setAmountInCart(itemInCart.amount);
+      setQuantity(itemInCart.amount);
       setIsInCart(true);
+    } else {
+      setQuantity(0);
+      setIsInCart(false);
     }
     return () => {};
-  }, []);
+  }, [itemsInCart]);
 
-  function addItemToCart(value) {
+  function changeValueInCart(value) {
     var prevAmountInCart = 0;
-    setAmountInCart((prevAmount) => {
+    setQuantity((prevAmount) => {
       prevAmountInCart = prevAmount;
       return value;
     });
@@ -72,7 +76,7 @@ export default function FoodCard({ currentItem }) {
 
   function checkIfAlreadyInCart() {
     if (itemsInCart.length > 0) {
-      let itemInCart = itemsInCart.filter(
+      let itemInCart = itemsInCart.find(
         (item) => item.name === currentItem.name
       );
       if (itemInCart) {
@@ -95,8 +99,8 @@ export default function FoodCard({ currentItem }) {
           </View>
           <View style={styles.numberInputContainer}>
             <NumberInput
-              value={amountInCart}
-              onChangeValue={(value) => addItemToCart(value)}
+              value={quantity}
+              onChangeValue={(value) => changeValueInCart(value)}
             />
           </View>
         </View>
