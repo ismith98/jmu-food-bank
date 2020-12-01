@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TouchableHighlight,
-} from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { SearchBar } from "react-native-elements";
 import { useCart } from "../contexts/CartContext";
+import ContinueButton from "./ContinueButton";
 import FoodCardInCart from "./FoodCardInCart";
 
 export default function CartList() {
@@ -46,11 +41,7 @@ export default function CartList() {
               <FoodCardInCart currentItem={item} key={index} index={index} />
             ))}
           </ScrollView>
-          <TouchableHighlight onPress={() => console.log("press")}>
-            <View style={styles.button}>
-              <Text style={styles.buttonText}>Continue</Text>
-            </View>
-          </TouchableHighlight>
+          <ContinueButton />
         </>
       ) : (
         <View style={styles.emptyCartView}>
@@ -73,20 +64,5 @@ const styles = StyleSheet.create({
   emptyCartText: {
     fontFamily: "Roboto",
     fontSize: 16,
-  },
-  button: {
-    backgroundColor: "#CBB677",
-    height: 40,
-    //flex: 1,
-    alignContent: "center",
-    justifyContent: "center",
-    margin: 10,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: "white",
-    textAlign: "center",
-    fontFamily: "Roboto",
-    fontSize: 20,
   },
 });
