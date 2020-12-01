@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 import { FontAwesome } from "@expo/vector-icons";
 import { useCart } from "../contexts/CartContext";
 import NumberInput from "./NumberInput";
-import RemoveFromCartModal from "./RemoveFromCartModal";
+import ConfirmModal from "./ConfirmModal";
 
 export default function FoodCardInCart({ currentItem, index }) {
   const { itemsInCart, setItemsInCart, setCartTotal } = useCart();
@@ -44,6 +44,13 @@ export default function FoodCardInCart({ currentItem, index }) {
     setCartTotal((prevTotal) => prevTotal + difference);
   }
 
+  function removeItemFromCart() {
+    setCartTotal((prevTotal) => prevTotal - quantity);
+    setItemsInCart((prevItems) =>
+      prevItems.filter((item) => item.name !== currentItem.name)
+    );
+  }
+
   return (
     <View style={styles.card}>
       <Image source={{ uri: currentItem.imageUrl }} style={styles.image} />
@@ -70,12 +77,11 @@ export default function FoodCardInCart({ currentItem, index }) {
           </View>
         </View>
       </TouchableHighlight>
-      <RemoveFromCartModal
+      <ConfirmModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
-        setCartTotal={setCartTotal}
-        setItemsInCart={setItemsInCart}
-        currentItem={currentItem}
+        onConfirm={removeItemFromCart}
+        confirmButtonText="Yes, delete the item"
       />
     </View>
   );

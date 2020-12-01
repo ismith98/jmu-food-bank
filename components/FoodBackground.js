@@ -4,13 +4,18 @@ import darkBackground from "../assets/background.png";
 import lightBackground from "../assets/lightBackground.png";
 import GeneralStyles from "../styles/GeneralStyles";
 
-export default function FoodBackground({ child, isDark = true }) {
+export default function FoodBackground({
+  child,
+  isDark = true,
+  fullScreen = true,
+  children,
+}) {
   return (
     <ImageBackground
       source={isDark ? darkBackground : lightBackground}
-      style={GeneralStyles.container}
+      style={fullScreen ? GeneralStyles.container : {}}
     >
-      {child}
+      {child ? child : children}
     </ImageBackground>
   );
 }

@@ -12,22 +12,28 @@ import FoodCardInCart from "./FoodCardInCart";
 
 export default function CartList() {
   const { cartTotal, itemsInCart } = useCart();
-  const [cartArray, setCartArray] = useState([]);
+  const [filteredItemsInCart, setFilteredItemsInCart] = useState(itemsInCart);
+  const [searchBarText, setSearchBarText] = useState("");
 
   useEffect(() => {
-    /*console.log(cartTotal);
-    console.log(cartArray);
-    let arr = cartArray.map((item, index) => index);
-    console.log(arr, "arr");
-    setCartArray(Array(cartTotal).fill(0));*/
+    setFilteredItemsInCart(itemsInCart);
     return () => {};
-  }, [cartTotal]);
+  }, [itemsInCart]);
+
+  function filterItems(text) {
+    setSearchBarText(text);
+    let filteredItems = itemsInCart.filter((item) => {
+      let name = item.name.toLowerCase();
+      return name.includes(text.toLowerCase());
+    });
+    setFilteredItemsInCart(filteredItems);
+  }
 
   return (
     <View style={{ flex: 1, width: "100%" }}>
       <SearchBar
-        //onChangeText={filterItems}
-        //value={searchBarText}
+        onChangeText={filterItems}
+        value={searchBarText}
         placeholder="Search for food"
         platform="ios"
         lightTheme
@@ -36,7 +42,7 @@ export default function CartList() {
       {cartTotal > 0 ? (
         <>
           <ScrollView>
-            {itemsInCart.map((item, index) => (
+            {filteredItemsInCart.map((item, index) => (
               <FoodCardInCart currentItem={item} key={index} index={index} />
             ))}
           </ScrollView>

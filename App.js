@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import Faq from "./pages/Faq";
 import Reserve from "./pages/Reserve";
 import Homepage from "./pages/Homepage";
@@ -12,6 +13,7 @@ import Cart from "./pages/Cart";
 import { useFonts } from "expo-font";
 import { AppLoading } from "expo";
 import { CartProvider, useCart } from "./contexts/CartContext";
+import Orders from "./pages/Orders";
 
 const customFonts = {
   RobotoCondensed: require("./fonts/RobotoCondensed-Regular.ttf"),
@@ -35,6 +37,10 @@ export default function App() {
             screenOptions={({ route }) => ({
               tabBarIcon: ({ focused, color, size }) => {
                 switch (route.name) {
+                  case "Orders":
+                    return (
+                      <MaterialIcons name="receipt" size={size} color={color} />
+                    );
                   case "Home":
                     return (
                       <Ionicons name="ios-home" size={size} color={color} />
@@ -66,6 +72,7 @@ export default function App() {
             }}
           >
             <Tab.Screen name="Faq" component={Faq} />
+            <Tab.Screen name="Orders" component={Orders} />
             <Tab.Screen name="Home" component={Homepage} />
             <Tab.Screen name="Reserve" component={Reserve} />
             <Tab.Screen name="Cart" component={Cart} />
