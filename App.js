@@ -53,7 +53,7 @@ export default function App() {
                     return (
                       <Ionicons name="ios-basket" size={size} color={color} />
                     );
-                  case "Faq":
+                  case "FAQ":
                     return (
                       <Ionicons
                         name="ios-help-circle"
@@ -71,7 +71,7 @@ export default function App() {
               inactiveTintColor: "gray",
             }}
           >
-            <Tab.Screen name="Faq" component={Faq} />
+            <Tab.Screen name="FAQ" component={Faq} />
             <Tab.Screen name="Orders" component={Orders} />
             <Tab.Screen name="Home" component={Homepage} />
             <Tab.Screen name="Reserve" component={Reserve} />

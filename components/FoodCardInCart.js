@@ -14,11 +14,13 @@ import ConfirmModal from "./ConfirmModal";
 
 export default function FoodCardInCart({ currentItem, index }) {
   const { itemsInCart, setItemsInCart, setCartTotal } = useCart();
-  const [quantity, setQuantity] = useState(itemsInCart[index].amount);
+  const [quantity, setQuantity] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    setQuantity(itemsInCart[index].amount);
+    if (itemsInCart[index]) {
+      setQuantity(itemsInCart[index].amount);
+    }
     return () => {};
   }, [itemsInCart]);
 
@@ -81,7 +83,7 @@ export default function FoodCardInCart({ currentItem, index }) {
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         onConfirm={removeItemFromCart}
-        confirmButtonText="Yes, delete the item"
+        confirmButtonText="Yes, delete"
       />
     </View>
   );
@@ -97,7 +99,7 @@ FoodCardInCart.propTypes = {
 
 const styles = StyleSheet.create({
   card: {
-    height: 90,
+    height: 100,
     flexDirection: "row",
     marginLeft: 16,
     marginRight: 16,
@@ -116,7 +118,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 90,
-    height: 90,
+    height: "100%",
   },
   itemInfo: {
     flex: 1,
@@ -132,7 +134,7 @@ const styles = StyleSheet.create({
   },
   addToCartContainer: {
     width: "100%",
-    height: 40,
+    height: 45,
     borderRadius: 5,
     flexDirection: "row",
     backgroundColor: "#450084",
@@ -159,7 +161,7 @@ const styles = StyleSheet.create({
   },
   removeView: {
     width: 60,
-    height: 90,
+    height: "100%",
     backgroundColor: "#EDEDED",
   },
   centerInventory: {

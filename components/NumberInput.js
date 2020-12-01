@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   view: {
     flex: 1,
     flexDirection: "row",
-    width: 65,
+    width: 75,
     height: "100%",
   },
   button: {

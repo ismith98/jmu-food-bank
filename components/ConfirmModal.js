@@ -41,7 +41,7 @@ export default function ConfirmModal({
                 style={{ ...styles.button, ...styles.returnButton }}
                 onPress={() => setModalVisible(!modalVisible)}
               >
-                <Text style={styles.textStyle}>No, take me back</Text>
+                <Text style={styles.textStyle}>No, go back</Text>
               </TouchableHighlight>
             </View>
           </FoodBackground>

@@ -117,7 +117,7 @@ export default function FoodCard({ currentItem }) {
 
 const styles = StyleSheet.create({
   card: {
-    height: 90,
+    height: 100,
     flexDirection: "row",
     marginLeft: 16,
     marginRight: 16,
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 90,
-    height: 90,
+    height: "100%",
   },
   itemInfo: {
     flex: 1,
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   },
   addToCartContainer: {
     width: "100%",
-    //height: 40,
+    height: 45,
     borderRadius: 5,
     flexDirection: "row",
     backgroundColor: "#450084",
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
   },
   inventory: {
     width: 60,
-    height: 90,
+    height: "100%",
     backgroundColor: "#EDEDED",
   },
   centerInventory: {
