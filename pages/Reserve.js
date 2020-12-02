@@ -11,7 +11,9 @@ export default function Reserve({ navigation }) {
       <MyHeader title={"Reserve Food"} />
 
       <View style={styles.body}>
-        <FoodBackground isDark={false} child={<FoodList />} />
+        <FoodBackground isDark={false}>
+          <FoodList />
+        </FoodBackground>
       </View>
     </View>
   );

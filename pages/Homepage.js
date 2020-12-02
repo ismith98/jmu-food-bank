@@ -8,7 +8,9 @@ import WelcomeContent from "../components/WelcomeContent";
 export default function Homepage() {
   return (
     <View style={GeneralStyles.container}>
-      <FoodBackground child={<WelcomeContent />} />
+      <FoodBackground>
+        <WelcomeContent />
+      </FoodBackground>
       {/*
       <HomepageButton isDonateButton={false} />
       <HomepageButton isDonateButton={true} />

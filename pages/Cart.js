@@ -30,7 +30,9 @@ export default function Cart({ navigation }) {
       <MyHeader title={"My Cart"} />
 
       <View style={styles.body}>
-        <FoodBackground isDark={false} child={<CartList />} />
+        <FoodBackground isDark={false}>
+          <CartList />
+        </FoodBackground>
       </View>
     </View>
   );

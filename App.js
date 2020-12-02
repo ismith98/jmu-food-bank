@@ -37,21 +37,21 @@ export default function App() {
             screenOptions={({ route }) => ({
               tabBarIcon: ({ focused, color, size }) => {
                 switch (route.name) {
-                  case "Orders":
-                    return (
-                      <MaterialIcons name="receipt" size={size} color={color} />
-                    );
                   case "Home":
                     return (
                       <Ionicons name="ios-home" size={size} color={color} />
                     );
-                  case "Cart":
-                    return (
-                      <Ionicons name="ios-cart" size={size} color={color} />
-                    );
                   case "Reserve":
                     return (
                       <Ionicons name="ios-basket" size={size} color={color} />
+                    );
+                  case "Orders":
+                    return (
+                      <MaterialIcons name="receipt" size={size} color={color} />
+                    );
+                  case "Cart":
+                    return (
+                      <Ionicons name="ios-cart" size={size} color={color} />
                     );
                   case "FAQ":
                     return (
@@ -85,18 +85,3 @@ export default function App() {
     return <AppLoading />;
   }
 }
-
-//<StatusBar style="auto" />
-
-/*
-              options={() => {
-                const { cartTotal } = useCart();
-                return cartTotal > 0
-                  ? {
-                      tabBarBadge: cartTotal,
-                      //activeTintColor: "#450084",
-                      tabBarBadgeStyle: { backgroundColor: "#450084" },
-                    }
-                  : null;
-              }}
-            */

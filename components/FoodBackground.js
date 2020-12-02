@@ -5,7 +5,6 @@ import lightBackground from "../assets/lightBackground.png";
 import GeneralStyles from "../styles/GeneralStyles";
 
 export default function FoodBackground({
-  child,
   isDark = true,
   fullScreen = true,
   children,
@@ -15,7 +14,7 @@ export default function FoodBackground({
       source={isDark ? darkBackground : lightBackground}
       style={fullScreen ? GeneralStyles.container : {}}
     >
-      {child ? child : children}
+      {children}
     </ImageBackground>
   );
 }
