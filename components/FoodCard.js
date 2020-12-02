@@ -20,6 +20,7 @@ export default function FoodCard({ currentItem }) {
     let itemInCart = checkIfAlreadyInCart();
     if (itemInCart) {
       setQuantity(itemInCart.amount);
+      setAvailableInventory(startingInventoryAmount - itemInCart.amount);
       setIsInCart(true);
     } else {
       setQuantity(0);
@@ -69,7 +70,12 @@ export default function FoodCard({ currentItem }) {
     setIsInCart(true);
     setItemsInCart((prevItems) => [
       ...prevItems,
-      { name: currentItem.name, amount: value, imageUrl: currentItem.imageUrl },
+      {
+        name: currentItem.name,
+        amount: value,
+        startingInventoryAmount: startingInventoryAmount,
+        imageUrl: currentItem.imageUrl,
+      },
     ]);
     setCartTotal((prevTotal) => prevTotal + difference);
   }

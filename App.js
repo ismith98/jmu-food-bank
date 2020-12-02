@@ -78,6 +78,7 @@ export default function App() {
             <Tab.Screen name="Cart" component={Cart} />
           </Tab.Navigator>
         </NavigationContainer>
+        <StatusBar style="light" />
       </CartProvider>
     );
   } else {
