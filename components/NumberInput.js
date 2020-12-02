@@ -17,8 +17,8 @@ export default function NumberInput({ value, onChangeValue, minValue = 0 }) {
     isInBounds(value - 1) ? onChangeValue(value - 1) : null;
   }
 
-  function isInBounds(text) {
-    return text >= minValue;
+  function isInBounds(number) {
+    return number >= minValue;
   }
 
   return (
@@ -30,9 +30,10 @@ export default function NumberInput({ value, onChangeValue, minValue = 0 }) {
       </TouchableHighlight>
       <TextInput
         style={styles.text}
-        onChangeText={(text) =>
-          isInBounds(Number(text)) ? onChangeValue(Number(text)) : null
-        }
+        onChangeText={(text) => {
+          let number = Math.ceil(Number(text));
+          return isInBounds(number) ? onChangeValue(number) : null;
+        }}
         value={`${value}`}
         keyboardType="numeric"
       />
