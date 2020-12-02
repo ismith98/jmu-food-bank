@@ -7,22 +7,12 @@ import MyHeader from "../components/MyHeader";
 
 export default function Reserve({ navigation }) {
   return (
-    <View style={{ flex: 1 }}>
-      <MyHeader title={"Reserve Food"} />
-
-      <View style={styles.body}>
-        <FoodBackground isDark={false}>
-          <FoodList />
-        </FoodBackground>
-      </View>
-    </View>
+    <MyHeader title={"Reserve Food"}>
+      <FoodBackground isDark={false}>
+        <FoodList />
+      </FoodBackground>
+    </MyHeader>
   );
 }
 
-const styles = StyleSheet.create({
-  body: {
-    //The height of the header is 80
-    marginTop: 80,
-    flex: 1,
-  },
-});
+const styles = StyleSheet.create({});

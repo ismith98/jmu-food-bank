@@ -26,22 +26,12 @@ export default function Cart({ navigation }) {
   }, [cartTotal]);
 
   return (
-    <View style={{ flex: 1 }}>
-      <MyHeader title={"My Cart"} />
-
-      <View style={styles.body}>
-        <FoodBackground isDark={false}>
-          <CartList />
-        </FoodBackground>
-      </View>
-    </View>
+    <MyHeader title={"My Cart"}>
+      <FoodBackground isDark={false}>
+        <CartList />
+      </FoodBackground>
+    </MyHeader>
   );
 }
 
-const styles = StyleSheet.create({
-  body: {
-    //The height of the header is 80
-    marginTop: 80,
-    flex: 1,
-  },
-});
+const styles = StyleSheet.create({});

@@ -1,13 +1,16 @@
 import React from "react";
 import { StyleSheet, Text, View, SafeAreaView, StatusBar } from "react-native";
 
-export default function MyHeader({ title }) {
+export default function MyHeader({ title, children }) {
   return (
-    <SafeAreaView style={styles.header}>
-      <Text style={styles.text} numberOfLines={1}>
-        {title}
-      </Text>
-    </SafeAreaView>
+    <>
+      <SafeAreaView style={styles.header}>
+        <Text style={styles.text} numberOfLines={1}>
+          {title}
+        </Text>
+      </SafeAreaView>
+      <View style={styles.body}>{children}</View>
+    </>
   );
 }
 
@@ -34,5 +37,10 @@ const styles = StyleSheet.create({
     color: "#fff",
     left: 16,
     top: 15,
+  },
+  body: {
+    //The height of the header is 80
+    marginTop: 80,
+    flex: 1,
   },
 });
