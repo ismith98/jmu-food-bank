@@ -11,10 +11,11 @@ export default function ContinueButton() {
 
   return (
     <>
-      <TouchableHighlight onPress={() => setModalVisible(true)}>
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>Checkout</Text>
-        </View>
+      <TouchableHighlight
+        style={styles.button}
+        onPress={() => setModalVisible(true)}
+      >
+        <Text style={styles.buttonText}>Checkout</Text>
       </TouchableHighlight>
       <ConfirmModal
         modalVisible={modalVisible}
@@ -30,7 +31,6 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "#CBB677",
     height: 45,
-    //flex: 1,
     alignContent: "center",
     justifyContent: "center",
     margin: 10,
