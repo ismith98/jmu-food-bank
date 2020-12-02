@@ -22,8 +22,10 @@ export default function FoodCard({ currentItem }) {
       setQuantity(itemInCart.amount);
       setAvailableInventory(startingInventoryAmount - itemInCart.amount);
       setIsInCart(true);
+      //changeValueInCart(itemInCart.amount);
     } else {
       setQuantity(0);
+      setAvailableInventory(startingInventoryAmount);
       setIsInCart(false);
     }
     return () => {};
@@ -31,6 +33,9 @@ export default function FoodCard({ currentItem }) {
 
   function changeValueInCart(value) {
     var prevAmountInCart = 0;
+    if (value > startingInventoryAmount) {
+      return;
+    }
     setQuantity((prevAmount) => {
       prevAmountInCart = prevAmount;
       return value;
