@@ -25,7 +25,7 @@ export default function FoodCardInCart({ currentItem, index }) {
   }, [itemsInCart]);
 
   function changeValueInCart(value) {
-    if (value > itemsInCart[index].startingInventoryAmount) {
+    if (value > itemsInCart[index].startingAmount) {
       return;
     }
     var prevAmountInCart = 0;

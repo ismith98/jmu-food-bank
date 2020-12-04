@@ -8,6 +8,7 @@ import MyHeader from "../components/MyHeader";
 export default function Reserve({ navigation }) {
   return (
     <MyHeader title={"Reserve Food"}>
+      {/* children appear beneath the header */}
       <FoodBackground isDark={false}>
         <FoodList />
       </FoodBackground>

@@ -3,44 +3,54 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import { useCart } from "../contexts/CartContext";
 import NumberInput from "./NumberInput";
 
-//console.log(foodItems[0].imageUrl);
-//const path = require("https://i.imgur.com/c0JWUxd.jpg");
 export default function FoodCard({ currentItem }) {
-  const startingInventoryAmount =
+  const startingAmount =
     currentItem.totalInventory - currentItem.amountReserved;
   const [quantity, setQuantity] = useState(0);
-  const [availableInventory, setAvailableInventory] = useState(
-    startingInventoryAmount
-  );
+  const [availableInventory, setAvailableInventory] = useState(startingAmount);
   const { itemsInCart, setItemsInCart, setCartTotal } = useCart();
   const [isInCart, setIsInCart] = useState(false);
 
   useEffect(() => {
-    //console.log("is items in cart");
-    let itemInCart = checkIfAlreadyInCart();
+    console.log(`change from food card ${currentItem.name}`);
+    let itemInCart = getThisItemFromCart();
     if (itemInCart) {
       setQuantity(itemInCart.amount);
-      setAvailableInventory(startingInventoryAmount - itemInCart.amount);
+      setAvailableInventory(startingAmount - itemInCart.amount);
       setIsInCart(true);
       //changeValueInCart(itemInCart.amount);
     } else {
       setQuantity(0);
-      setAvailableInventory(startingInventoryAmount);
+      setAvailableInventory(startingAmount);
       setIsInCart(false);
     }
     return () => {};
   }, [itemsInCart]);
 
+  function getThisItemFromCart() {
+    if (itemsInCart.length > 0) {
+      let itemInCart = itemsInCart.find(
+        (item) => item.name === currentItem.name
+      );
+      if (itemInCart) {
+        setIsInCart(true);
+      }
+      return itemInCart;
+    } else {
+      return null;
+    }
+  }
+
   function changeValueInCart(value) {
-    var prevAmountInCart = 0;
-    if (value > startingInventoryAmount) {
+    if (value > startingAmount) {
       return;
     }
+    var prevAmountInCart = 0;
     setQuantity((prevAmount) => {
       prevAmountInCart = prevAmount;
       return value;
     });
-    setAvailableInventory(startingInventoryAmount - value);
+    setAvailableInventory(startingAmount - value);
     let difference = value - prevAmountInCart;
     if (value === 0) {
       removeItemFromCart(difference);
@@ -78,25 +88,11 @@ export default function FoodCard({ currentItem }) {
       {
         name: currentItem.name,
         amount: value,
-        startingInventoryAmount: startingInventoryAmount,
+        startingAmount: startingAmount,
         imageUrl: currentItem.imageUrl,
       },
     ]);
     setCartTotal((prevTotal) => prevTotal + difference);
-  }
-
-  function checkIfAlreadyInCart() {
-    if (itemsInCart.length > 0) {
-      let itemInCart = itemsInCart.find(
-        (item) => item.name === currentItem.name
-      );
-      if (itemInCart) {
-        setIsInCart(true);
-      }
-      return itemInCart;
-    } else {
-      return null;
-    }
   }
 
   return (

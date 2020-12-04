@@ -27,6 +27,7 @@ export default function Cart({ navigation }) {
 
   return (
     <MyHeader title={"My Cart"}>
+      {/* children appear beneath the header */}
       <FoodBackground isDark={false}>
         <CartList />
       </FoodBackground>

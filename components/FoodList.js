@@ -20,7 +20,6 @@ export default function FoodList() {
   }, []);
 
   function handleRefresh() {
-    console.log("refresh", foodItems[0].name, foodItems[0].amountInCart);
     setRefreshing(true);
     setFoodItems([]);
     getFoodItems();
@@ -34,8 +33,6 @@ export default function FoodList() {
       .orderByKey()
       .startAt(`0`)
       .once("value", (snapshot) => {
-        setLoading(false);
-
         let value = snapshot.val();
         if (value !== null) {
           console.log("yes");
@@ -57,6 +54,7 @@ export default function FoodList() {
           setFoodItems(items);
           setFilteredFoodItems(items);
         }
+        setLoading(false);
         setRefreshing(false);
       });
   }
@@ -89,7 +87,6 @@ export default function FoodList() {
 
   return (
     <View style={{ flex: 1, width: "100%" }}>
-      {/*<UserList />*/}
       <SearchBar
         onChangeText={filterItems}
         value={searchBarText}
@@ -100,7 +97,6 @@ export default function FoodList() {
       />
       <FlatList
         data={filteredFoodItems}
-        keyExtractor={({ index }) => index}
         ListFooterComponent={renderFooter}
         refreshing={refreshing}
         onRefresh={handleRefresh}
