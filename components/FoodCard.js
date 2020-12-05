@@ -12,7 +12,7 @@ export default function FoodCard({ currentItem }) {
   const [isInCart, setIsInCart] = useState(false);
 
   useEffect(() => {
-    console.log(`change from food card ${currentItem.name}`);
+    //console.log(`change from food card ${currentItem.name}`);
     let itemInCart = getThisItemFromCart();
     if (itemInCart) {
       setQuantity(itemInCart.amount);
