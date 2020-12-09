@@ -21,7 +21,7 @@ export default function ContinueButton() {
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         onConfirm={onConfrim}
-        confirmButtonText="Yes, checkout"
+        confirmButtonText="Checkout"
       />
     </>
   );

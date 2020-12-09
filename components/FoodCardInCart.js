@@ -89,7 +89,7 @@ export default function FoodCardInCart({ currentItem, index }) {
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         onConfirm={removeItemFromCart}
-        confirmButtonText="Yes, delete"
+        confirmButtonText="Remove from cart"
       />
     </View>
   );
