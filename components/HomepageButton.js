@@ -4,41 +4,44 @@ import {
   Text,
   View,
   TouchableHighlight,
+  TouchableOpacity,
   Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import GeneralStyles from "../styles/GeneralStyles";
 import donateFoodIcon from "../assets/welcomeScreenDonateFoodIcon.png";
 import reserveFoodIcon from "../assets/welcomeScreenReserveFoodIcon.png";
+import { Ionicons } from "@expo/vector-icons";
 
-export default function HomepageButton({ isDonateButton }) {
+export default function HomepageButton({ isReserveButton = true }) {
   const navigation = useNavigation();
   function onPress() {
-    isDonateButton ? gotoDonatePage() : gotoReservePage();
+    isReserveButton ? gotoReservePage() : gotoFaqPage();
   }
 
-  function gotoDonatePage() {
-    console.log("goto donate page");
+  function gotoFaqPage() {
+    navigation.navigate("FAQ");
   }
 
   function gotoReservePage() {
-    navigation.navigate("Root", { screen: "Reserve" });
+    navigation.navigate("Reserve");
   }
 
   return (
-    <TouchableHighlight
+    <TouchableOpacity
       onPress={onPress}
       style={[GeneralStyles.buttonContainer, styles.homepageButton]}
     >
-      <View>
-        <Image
-          style={styles.icon}
-          source={isDonateButton ? donateFoodIcon : reserveFoodIcon}
+      <>
+        <Ionicons
+          name={isReserveButton ? "ios-basket" : "ios-help-circle"}
+          size={30}
+          color={"#450084"}
         />
 
-        <Text>{isDonateButton ? "Donate Food" : "Reserve Food"}</Text>
-      </View>
-    </TouchableHighlight>
+        <Text>{isReserveButton ? "Reserve Food" : "FAQs"}</Text>
+      </>
+    </TouchableOpacity>
   );
 }
 

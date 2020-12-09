@@ -19,7 +19,9 @@ export default function WelcomeContent() {
         <Text style={styles.br}>{"\n\n"}</Text>
         <Text style={styles.bodyText}>
           To see the inventory of your local food bank, or to reserve food for
-          pickup, press{" "}
+          pickup, press reserve food{" "}
+        </Text>
+        {/* 
           <Text onPress={gotoReservePage} style={styles.underline}>
             Reserve
           </Text>
@@ -28,6 +30,7 @@ export default function WelcomeContent() {
         <Text onPress={gotoFaqPage} style={styles.underline}>
           Questions? Visit FAQ {">>"}
         </Text>
+        */}
       </Text>
     </View>
   );
