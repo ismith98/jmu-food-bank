@@ -12,7 +12,7 @@ export default function FoodCard({ currentItem }) {
   const [isInCart, setIsInCart] = useState(false);
 
   useEffect(() => {
-    //console.log(`change from food card ${currentItem.name}`);
+    //console.log(`change from food card ${currentItem.id}`);
     let itemInCart = getThisItemFromCart();
     if (itemInCart) {
       setQuantity(itemInCart.amount);
@@ -29,9 +29,7 @@ export default function FoodCard({ currentItem }) {
 
   function getThisItemFromCart() {
     if (itemsInCart.length > 0) {
-      let itemInCart = itemsInCart.find(
-        (item) => item.name === currentItem.name
-      );
+      let itemInCart = itemsInCart.find((item) => item.id === currentItem.id);
       if (itemInCart) {
         setIsInCart(true);
       }
@@ -64,7 +62,7 @@ export default function FoodCard({ currentItem }) {
   function removeItemFromCart(difference) {
     setIsInCart(false);
     setItemsInCart((prevItems) =>
-      prevItems.filter((item) => item.name !== currentItem.name)
+      prevItems.filter((item) => item.id !== currentItem.id)
     );
     setCartTotal((prevTotal) => prevTotal + difference);
   }
@@ -72,7 +70,7 @@ export default function FoodCard({ currentItem }) {
   function replaceAmountInCart(value, difference) {
     setItemsInCart((prevItems) =>
       prevItems.map((item) => {
-        if (item.name === currentItem.name) {
+        if (item.id === currentItem.id) {
           item.amount = value;
         }
         return item;
@@ -90,6 +88,7 @@ export default function FoodCard({ currentItem }) {
         amount: value,
         startingAmount: startingAmount,
         imageUrl: currentItem.imageUrl,
+        id: currentItem.id,
       },
     ]);
     setCartTotal((prevTotal) => prevTotal + difference);

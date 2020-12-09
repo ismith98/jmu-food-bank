@@ -27,6 +27,9 @@ export default function FoodCardInCart({ currentItem, index }) {
   function changeValueInCart(value) {
     if (value > itemsInCart[index].startingAmount) {
       return;
+    } else if (value === 0) {
+      setModalVisible(true);
+      return;
     }
     var prevAmountInCart = 0;
     setQuantity((prevAmount) => {
@@ -40,7 +43,7 @@ export default function FoodCardInCart({ currentItem, index }) {
   function replaceAmountInCart(value, difference) {
     setItemsInCart((prevItems) =>
       prevItems.map((item) => {
-        if (item.name === currentItem.name) {
+        if (item.id === currentItem.id) {
           item.amount = value;
         }
         return item;
@@ -52,7 +55,7 @@ export default function FoodCardInCart({ currentItem, index }) {
   function removeItemFromCart() {
     setCartTotal((prevTotal) => prevTotal - quantity);
     setItemsInCart((prevItems) =>
-      prevItems.filter((item) => item.name !== currentItem.name)
+      prevItems.filter((item) => item.id !== currentItem.id)
     );
   }
 
@@ -69,7 +72,7 @@ export default function FoodCardInCart({ currentItem, index }) {
             <NumberInput
               value={quantity}
               onChangeValue={changeValueInCart}
-              minValue={1}
+              minValue={0}
             />
           </View>
         </View>

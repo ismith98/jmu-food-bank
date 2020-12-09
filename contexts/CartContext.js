@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import humanId from "human-id";
+import firebase from "../firebase";
 
 const CartContext = React.createContext();
 
@@ -13,11 +14,14 @@ export function CartProvider({ children }) {
   //contains the item id, item name, and amount in cart
   //item name will be used for the order info during checkout
 
-  function onContinue() {
+  function onCheckout() {
     let id = humanId("-");
   }
 
-  function addToDb() {}
+  function addToDb() {
+    const foodItemsRef = firebase.database().ref("foodItems/");
+    //foodItemsRef
+  }
 
   return (
     <CartContext.Provider

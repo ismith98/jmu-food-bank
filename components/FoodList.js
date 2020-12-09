@@ -100,6 +100,7 @@ export default function FoodList() {
         ListFooterComponent={renderFooter}
         refreshing={refreshing}
         onRefresh={handleRefresh}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({ item, index }) => (
           <FoodCard currentItem={item} key={index} />
         )}
