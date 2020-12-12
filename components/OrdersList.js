@@ -10,6 +10,7 @@ import OrderCard from "./OrderCard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCart } from "../contexts/CartContext";
 import { useErrorAlert } from "../hooks/useAlert";
+import ClearOrdersButton from "./ClearOrdersButton";
 
 export default function OrdersList() {
   const { orderComplete, setOrderCompleteSemtex } = useCart();
@@ -44,7 +45,7 @@ export default function OrdersList() {
     }
   }
 
-  async function clear() {
+  async function clearOrders() {
     setIsClearing(!isClearing);
     await AsyncStorage.removeItem("@food-bank-orders");
   }
@@ -70,12 +71,7 @@ export default function OrdersList() {
           </View>
         </View>
       )}
-      <TouchableOpacity
-        style={styles.button}
-        onPress={async () => clear() /*setModalVisible(true)*/}
-      >
-        <Text style={styles.buttonText}>Clear</Text>
-      </TouchableOpacity>
+      <ClearOrdersButton clearOrders={clearOrders} />
     </View>
   );
 }
@@ -97,19 +93,5 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
     fontSize: 16,
     textAlign: "center",
-  },
-  button: {
-    backgroundColor: "#CBB677",
-    height: 45,
-    alignContent: "center",
-    justifyContent: "center",
-    margin: 10,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: "white",
-    textAlign: "center",
-    fontFamily: "Roboto",
-    fontSize: 20,
   },
 });

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { SearchBar } from "react-native-elements";
 import { useCart } from "../contexts/CartContext";
-import ContinueButton from "./ContinueButton";
+import CheckoutButton from "./CheckoutButton";
 import FoodCardInCart from "./FoodCardInCart";
 
 export default function CartList() {
@@ -41,7 +41,7 @@ export default function CartList() {
               <FoodCardInCart currentItem={item} key={index} index={index} />
             ))}
           </ScrollView>
-          <ContinueButton />
+          <CheckoutButton />
         </>
       ) : (
         <View style={styles.emptyCartView}>

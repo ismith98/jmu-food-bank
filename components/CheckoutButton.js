@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { useCart } from "../contexts/CartContext";
 import ConfirmModal from "./ConfirmModal";
 
-export default function ContinueButton() {
+export default function CheckoutButton() {
   const [modalVisible, setModalVisible] = useState(false);
   const { onCheckout, orderComplete, setOrderCompleteSemtex } = useCart();
   const navigation = useNavigation();
