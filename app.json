@@ -22,6 +22,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": "added searchbar"
+    "description": "View the pop up pantry inventory and reserve items for pickup"
   }
 }

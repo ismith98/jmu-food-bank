@@ -1,14 +1,16 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import MyHeader from "../components/MyHeader";
-import LocationCard from "../components/LocationCard";
+import FoodBackground from "../components/FoodBackground";
+import OrdersList from "../components/OrdersList";
 
 export default function Orders() {
   return (
     <MyHeader title="My Orders">
       {/* children appear beneath the header */}
-      <Text></Text>
-      <LocationCard />
+      <FoodBackground isDark={false}>
+        <OrdersList />
+      </FoodBackground>
     </MyHeader>
   );
 }

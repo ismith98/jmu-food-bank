@@ -13,7 +13,7 @@ export default function FoodList() {
   const [filteredFoodItems, setFilteredFoodItems] = useState([]);
   const [searchBarText, setSearchBarText] = useState("");
   const { orderComplete, setOrderCompleteSemtex } = useCart();
-  useUpdateLogger(foodItems);
+  //useUpdateLogger(foodItems);
   //useUpdateLogger(filteredFoodItems);
 
   useEffect(() => {
@@ -45,22 +45,7 @@ export default function FoodList() {
       .once("value", (snapshot) => {
         let value = snapshot.val();
         if (value !== null) {
-          console.log("yes");
           let items = Object.values(value);
-          /*
-          if (!refreshing) {
-            setFoodItems(items.map((item) => (item.amountInCart = 0)));
-          } else {
-            setFoodItems((prevFoodItems) => {
-              let prevItems = [...prevFoodItems];
-              return items.map((item) => {
-                prevItems.includes((prevItem) => prevItem.name === item.name)
-                  ? (item.amountInCart = 0)
-                  : (item.amountInCart = prevItem.amountInCart);
-              });
-            });
-          }
-          */
           setFoodItems(items);
           setFilteredFoodItems(items);
         }

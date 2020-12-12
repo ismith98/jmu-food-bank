@@ -14,7 +14,7 @@ export function CartProvider({ children }) {
   const [itemsInCart, setItemsInCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
   const [orderComplete, setOrderComplete] = useState(false);
-  const SEMTEX_AMOUNT = 2;
+  const SEMTEX_AMOUNT = 3;
   const [orderCompleteSemtex, setOrderCompleteSemtex] = useState(SEMTEX_AMOUNT);
   //contains the item id, item name, and amount in cart
   //item name will be used for the order info during checkout
@@ -30,11 +30,12 @@ export function CartProvider({ children }) {
   function onCheckout() {
     // gather details
     let orderId = humanId("-");
-    let date = new Date();
+    let timeOrdered = new Date();
     let orderDetails = {
       orderId: orderId,
-      date: date.toString(),
+      timeOrdered: timeOrdered.toString(),
       itemsInCart: itemsInCart,
+      //pickupTime:
     };
 
     //modify db
@@ -99,7 +100,7 @@ export function CartProvider({ children }) {
       function (error, committed, snapshot) {
         if (error) {
           useErrorAlert(`Error adding your order to our Database |  ${error}`);
-        } else {
+        } else if (committed) {
           addOrderToPhoneStorage(orderDetails);
         }
 
@@ -114,33 +115,34 @@ export function CartProvider({ children }) {
 
   async function addOrderToPhoneStorage(orderDetails) {
     console.log("add order to phone storage");
-    /*
+
     try {
       const value = await AsyncStorage.getItem("@food-bank-orders");
       if (value === null) {
         // add new storage value
-        await AsyncStorage.setItem("@food-bank-orders", `[${orderDetails}]`);
+        let order = new Array(orderDetails);
+        await AsyncStorage.setItem("@food-bank-orders", JSON.stringify(order));
       } else {
-        // append storage value
+        // add storage value to front of the list
         let prevOrders = JSON.parse(value);
-        prevOrders.push(orderDetails);
+        prevOrders.unshift(orderDetails);
         await AsyncStorage.setItem(
           "@food-bank-orders",
           JSON.stringify(prevOrders)
         );
       }
+
+      // cleanup
+      setOrderComplete(true);
+      setCartTotal(0);
+      setItemsInCart([]);
+      useAlert("Order Placed", `Your order id is ${orderDetails.orderId}`);
     } catch (e) {
       // error reading value
-      useErrorAlert(`error uploading order to device storage ${e}`);
+      useErrorAlert(
+        `Order placed but problem uploading it to device storage: Notify jmu pop up pantry ${e}`
+      );
     }
-    */
-    setOrderComplete(true);
-    setCartTotal(0);
-    setItemsInCart([]);
-    useAlert(
-      "Success",
-      `You've succesfully placed an order. Here's your Id: ${orderDetails.orderId}`
-    );
   }
 
   return (

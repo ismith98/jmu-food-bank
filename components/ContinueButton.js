@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { useCart } from "../contexts/CartContext";
 import ConfirmModal from "./ConfirmModal";
 
@@ -19,12 +19,12 @@ export default function ContinueButton() {
 
   return (
     <>
-      <TouchableHighlight
+      <TouchableOpacity
         style={styles.button}
         onPress={() => setModalVisible(true)}
       >
         <Text style={styles.buttonText}>Checkout</Text>
-      </TouchableHighlight>
+      </TouchableOpacity>
       <ConfirmModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
