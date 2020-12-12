@@ -4,21 +4,27 @@ import { useCart } from "../contexts/CartContext";
 import NumberInput from "./NumberInput";
 
 export default function FoodCard({ currentItem }) {
-  const startingAmount =
-    currentItem.totalInventory - currentItem.amountReserved;
+  const [startingAmount, setStartingAmount] = useState(
+    currentItem.totalInventory - currentItem.amountReserved
+  );
   const [quantity, setQuantity] = useState(0);
   const [availableInventory, setAvailableInventory] = useState(startingAmount);
   const { itemsInCart, setItemsInCart, setCartTotal } = useCart();
   const [isInCart, setIsInCart] = useState(false);
 
   useEffect(() => {
-    //console.log(`change from food card ${currentItem.id}`);
+    let startAmount = currentItem.totalInventory - currentItem.amountReserved;
+    setStartingAmount(startAmount);
+    setAvailableInventory(startAmount);
+    return () => {};
+  }, [currentItem]);
+
+  useEffect(() => {
     let itemInCart = getThisItemFromCart();
     if (itemInCart) {
       setQuantity(itemInCart.amount);
       setAvailableInventory(startingAmount - itemInCart.amount);
       setIsInCart(true);
-      //changeValueInCart(itemInCart.amount);
     } else {
       setQuantity(0);
       setAvailableInventory(startingAmount);

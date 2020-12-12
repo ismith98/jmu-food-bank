@@ -45,10 +45,11 @@ export default function CartList() {
         </>
       ) : (
         <View style={styles.emptyCartView}>
-          <Text style={styles.emptyCartText}>
-            No Items are currently in your cart. {"\n"} Add some from the
-            reserve page.
-          </Text>
+          <View style={styles.bg}>
+            <Text style={styles.emptyCartText}>
+              No items in your cart {"\n"} Go to the reserve page
+            </Text>
+          </View>
         </View>
       )}
     </View>
@@ -60,9 +61,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
+    //height: 100,
+    //backgroundColor: "#EDEDED",
+  },
+  bg: {
+    backgroundColor: "#EDEDED",
+    padding: 5,
+    borderRadius: 5,
   },
   emptyCartText: {
     fontFamily: "Roboto",
     fontSize: 16,
+    textAlign: "center",
   },
 });

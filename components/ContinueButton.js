@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
+import { useCart } from "../contexts/CartContext";
 import ConfirmModal from "./ConfirmModal";
 
 export default function ContinueButton() {
   const [modalVisible, setModalVisible] = useState(false);
+  const { onCheckout, orderComplete, setOrderCompleteSemtex } = useCart();
+  const navigation = useNavigation();
 
-  function onConfrim() {
-    console.log("confirm");
-  }
+  useEffect(() => {
+    if (orderComplete) {
+      navigation.navigate("Orders");
+      setOrderCompleteSemtex((prev) => prev - 1);
+    }
+    return () => {};
+  }, [orderComplete]);
 
   return (
     <>
@@ -20,7 +28,7 @@ export default function ContinueButton() {
       <ConfirmModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
-        onConfirm={onConfrim}
+        onConfirm={onCheckout}
         confirmButtonText="Checkout"
       />
     </>

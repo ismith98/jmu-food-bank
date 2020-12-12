@@ -4,6 +4,7 @@ import { SearchBar } from "react-native-elements";
 import FoodCard from "./FoodCard";
 import firebase from "../firebase";
 import useUpdateLogger from "../hooks/useUpdateLogger";
+import { useCart } from "../contexts/CartContext";
 
 export default function FoodList() {
   const [loading, setLoading] = useState(false);
@@ -11,6 +12,7 @@ export default function FoodList() {
   const [foodItems, setFoodItems] = useState([]);
   const [filteredFoodItems, setFilteredFoodItems] = useState([]);
   const [searchBarText, setSearchBarText] = useState("");
+  const { orderComplete, setOrderCompleteSemtex } = useCart();
   useUpdateLogger(foodItems);
   //useUpdateLogger(filteredFoodItems);
 
@@ -18,6 +20,14 @@ export default function FoodList() {
     getFoodItems();
     return () => {};
   }, []);
+
+  useEffect(() => {
+    if (orderComplete) {
+      handleRefresh();
+      setOrderCompleteSemtex((prev) => prev - 1);
+    }
+    return () => {};
+  }, [orderComplete]);
 
   function handleRefresh() {
     setRefreshing(true);

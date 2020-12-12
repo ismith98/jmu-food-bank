@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 export default function WelcomeContent() {
   const navigation = useNavigation();
   function gotoFaqPage() {
-    navigation.navigate("Faq");
+    navigation.navigate("FAQ");
   }
 
   function gotoReservePage() {
@@ -15,22 +15,19 @@ export default function WelcomeContent() {
   return (
     <View style={styles.container}>
       <Text style={styles.textContainer}>
-        <Text style={styles.welcomeText}>Welcome </Text>
+        <Text style={styles.welcomeText}>JMU Pop-Up Pantry </Text>
         <Text style={styles.br}>{"\n\n"}</Text>
         <Text style={styles.bodyText}>
-          To see the inventory of your local food bank, or to reserve food for
-          pickup, press reserve food{" "}
-        </Text>
-        {/* 
           <Text onPress={gotoReservePage} style={styles.underline}>
-            Reserve
-          </Text>
+            Press reserve
+          </Text>{" "}
+          to see the inventory of your local food bank, or to reserve food for
+          pickup, press reserve food
         </Text>
         <Text style={styles.br}>{"\n\n"}</Text>
         <Text onPress={gotoFaqPage} style={styles.underline}>
           Questions? Visit FAQ {">>"}
         </Text>
-        */}
       </Text>
     </View>
   );

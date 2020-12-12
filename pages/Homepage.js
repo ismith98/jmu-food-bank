@@ -13,16 +13,17 @@ export default function Homepage() {
           <WelcomeContent />
         </FoodBackground>
       </View>
-
+      {/*
       <HomepageButton isReserveButton={true} />
       <HomepageButton isReserveButton={false} />
+       */}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  foodBg: {
+  /*foodBg: {
     height: 250,
     marginBottom: 15,
-  },
+  },*/
 });
