@@ -22,7 +22,7 @@ export default function WelcomeContent() {
             Press reserve
           </Text>{" "}
           to see the inventory of your local food bank, or to reserve food for
-          pickup, press reserve food
+          pickup
         </Text>
         <Text style={styles.br}>{"\n\n"}</Text>
         <Text onPress={gotoFaqPage} style={styles.underline}>

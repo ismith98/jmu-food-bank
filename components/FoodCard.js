@@ -103,6 +103,12 @@ export default function FoodCard({ currentItem }) {
   return (
     <View style={styles.card}>
       <Image source={{ uri: currentItem.imageUrl }} style={styles.image} />
+      <View style={styles.inventory}>
+        <View style={styles.centerInventory}>
+          <Text style={styles.number}>{availableInventory}</Text>
+          <Text style={styles.inStock}>In Stock</Text>
+        </View>
+      </View>
       <View style={styles.itemInfo}>
         <Text style={styles.name}>{currentItem.name}</Text>
         <View style={styles.addToCartContainer}>
@@ -115,12 +121,6 @@ export default function FoodCard({ currentItem }) {
               onChangeValue={(value) => changeValueInCart(value)}
             />
           </View>
-        </View>
-      </View>
-      <View style={styles.inventory}>
-        <View style={styles.centerInventory}>
-          <Text style={styles.number}>{availableInventory}</Text>
-          <Text style={styles.inStock}>In Stock</Text>
         </View>
       </View>
     </View>
