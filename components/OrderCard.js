@@ -6,15 +6,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function OrderCard({ order }) {
   const [hideDetails, setHideDetails] = useState(true);
-  const orderId = "test123";
   const pickupTime = "mon 12/9/2020";
-  const items = [
-    { name: "eggs" },
-    { name: "soup" },
-    { name: "can of beans " },
-    { name: "meso soup" },
-    { name: "can of tomatoes" },
-  ];
   return (
     <View style={styles.card}>
       <View style={styles.header}>
