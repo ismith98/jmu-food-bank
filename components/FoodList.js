@@ -74,7 +74,7 @@ export default function FoodList() {
             borderColor: "#CED0CE",
           }}
         >
-          <ActivityIndicator size="large" />
+          <ActivityIndicator size="large" color="#0000ff" />
         </View>
       );
     }

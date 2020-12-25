@@ -6,7 +6,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function OrderCard({ order }) {
   const [hideDetails, setHideDetails] = useState(true);
-  const pickupTime = "mon 12/9/2020";
+  const defaultPickupTime = "mon 12/9/2020";
   return (
     <View style={styles.card}>
       <View style={styles.header}>
@@ -21,7 +21,10 @@ export default function OrderCard({ order }) {
           <Ionicons name="md-time" size={20} color="black" />
           <Text>
             {"  "}
-            {pickupTime} {"\n"}
+            {order.pickupTime
+              ? order.pickupTime.toString()
+              : defaultPickupTime}{" "}
+            {"\n"}
           </Text>
           <MaterialCommunityIcons name="food-apple" size={20} color="black" />
           <Text style={styles.itemNames} numberOfLines={1}>
@@ -80,14 +83,14 @@ const styles = StyleSheet.create({
   },
   header: {
     width: "100%",
-    backgroundColor: "#CBB677",
+    backgroundColor: "#450084",
     padding: 5,
   },
   headerText: {
     fontSize: 16,
     fontWeight: "bold",
     fontFamily: "RobotoCondensed",
-    color: "black",
+    color: "white",
   },
   content: {
     padding: 5,

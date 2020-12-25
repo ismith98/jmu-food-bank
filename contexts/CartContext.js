@@ -3,6 +3,7 @@ import humanId from "human-id";
 import firebase from "../firebase";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAlert, useErrorAlert } from "../hooks/useAlert";
+//import dayjs from "dayjs";
 
 const CartContext = React.createContext();
 
@@ -14,8 +15,10 @@ export function CartProvider({ children }) {
   const [itemsInCart, setItemsInCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
   const [orderComplete, setOrderComplete] = useState(false);
+  const [startOrder, setStartOrder] = useState(false);
   const SEMTEX_AMOUNT = 3;
   const [orderCompleteSemtex, setOrderCompleteSemtex] = useState(SEMTEX_AMOUNT);
+  const [pickupDate, setPickupDate] = useState("");
   //contains the item id, item name, and amount in cart
   //item name will be used for the order info during checkout
 
@@ -35,8 +38,10 @@ export function CartProvider({ children }) {
       orderId: orderId,
       timeOrdered: timeOrdered.toString(),
       itemsInCart: itemsInCart,
-      //pickupTime:
+      pickupTime: pickupDate,
     };
+
+    setStartOrder(true);
 
     //modify db
     modifyDb(orderDetails);
@@ -134,6 +139,7 @@ export function CartProvider({ children }) {
 
       // cleanup
       setOrderComplete(true);
+      setStartOrder(false);
       setCartTotal(0);
       setItemsInCart([]);
       useAlert("Order Placed", `Your order id is ${orderDetails.orderId}`);
@@ -155,6 +161,8 @@ export function CartProvider({ children }) {
         onCheckout,
         orderComplete,
         setOrderCompleteSemtex,
+        setPickupDate,
+        startOrder,
       }}
     >
       {children}

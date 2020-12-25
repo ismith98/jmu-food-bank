@@ -12,7 +12,7 @@ import { useCart } from "../contexts/CartContext";
 import NumberInput from "./NumberInput";
 import ConfirmModal from "./ConfirmModal";
 
-export default function FoodCardInCart({ currentItem, index }) {
+export default function CartCard({ currentItem, index }) {
   const { itemsInCart, setItemsInCart, setCartTotal } = useCart();
   const [quantity, setQuantity] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
@@ -95,7 +95,7 @@ export default function FoodCardInCart({ currentItem, index }) {
   );
 }
 
-FoodCardInCart.propTypes = {
+CartCard.propTypes = {
   currentItem: PropTypes.shape({
     name: PropTypes.string,
     imageUrl: PropTypes.string,

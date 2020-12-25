@@ -24,7 +24,7 @@ export default function ClearOrdersButton({ clearOrders }) {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "#CBB677",
+    backgroundColor: "#cca532",
     height: 45,
     alignContent: "center",
     justifyContent: "center",

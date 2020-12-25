@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 import { SearchBar } from "react-native-elements";
 import { useCart } from "../contexts/CartContext";
 import CheckoutButton from "./CheckoutButton";
-import FoodCardInCart from "./FoodCardInCart";
+import CartCard from "./CartCard";
 
 export default function CartList() {
-  const { cartTotal, itemsInCart } = useCart();
+  const { cartTotal, itemsInCart, startOrder, orderComplete } = useCart();
   const [filteredItemsInCart, setFilteredItemsInCart] = useState(itemsInCart);
   const [searchBarText, setSearchBarText] = useState("");
 
@@ -36,12 +42,26 @@ export default function CartList() {
       />
       {cartTotal > 0 ? (
         <>
-          <ScrollView>
-            {filteredItemsInCart.map((item, index) => (
-              <FoodCardInCart currentItem={item} key={index} index={index} />
-            ))}
-          </ScrollView>
-          <CheckoutButton />
+          {startOrder && !orderComplete ? (
+            <View
+              style={{
+                paddingVertical: 20,
+                borderTopWidth: 1,
+                borderColor: "#CED0CE",
+              }}
+            >
+              <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+          ) : (
+            <>
+              <ScrollView>
+                {filteredItemsInCart.map((item, index) => (
+                  <CartCard currentItem={item} key={index} index={index} />
+                ))}
+              </ScrollView>
+              <CheckoutButton />
+            </>
+          )}
         </>
       ) : (
         <View style={styles.emptyCartView}>
