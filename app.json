@@ -4,18 +4,22 @@
     "slug": "jmu-food-bank",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/food-pantry-ios-icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/food-pantry-splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/food-pantry-adaptive-icon.png",
+        "backgroundColor": "#310171"
+      }
+    },
     "ios": {
       "supportsTablet": true
     },

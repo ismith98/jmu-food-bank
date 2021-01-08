@@ -13,7 +13,7 @@ import { useErrorAlert } from "../hooks/useAlert";
 import ClearOrdersButton from "./ClearOrdersButton";
 
 export default function OrdersList() {
-  const { orderComplete, setOrderCompleteSemtex } = useCart();
+  const { orderComplete, setThreadsStillProcessing } = useCart();
   const [isEmpty, setIsEmpty] = useState(true);
   const [orders, setOrders] = useState([]);
   const [isClearing, setIsClearing] = useState(false);
@@ -21,18 +21,16 @@ export default function OrdersList() {
   useEffect(() => {
     getOrdersFromPhoneStorage();
     if (orderComplete) {
-      setOrderCompleteSemtex((prev) => prev - 1);
+      setThreadsStillProcessing((prev) => prev - 1);
     }
 
     return () => {};
   }, [orderComplete, isClearing]);
 
   async function getOrdersFromPhoneStorage() {
-    console.log("get order from phone storage");
     try {
       let value = await AsyncStorage.getItem("@food-bank-orders");
       value = JSON.parse(value);
-      console.log(value);
       if (value === null) {
         setIsEmpty(true);
       } else {

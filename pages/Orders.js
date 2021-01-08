@@ -6,7 +6,7 @@ import OrdersList from "../components/OrdersList";
 
 export default function Orders() {
   return (
-    <MyHeader title="My Orders">
+    <MyHeader title="My Reciepts">
       {/* children appear beneath the header */}
       <FoodBackground isDark={false}>
         <OrdersList />

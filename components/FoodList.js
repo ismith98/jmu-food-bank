@@ -12,7 +12,7 @@ export default function FoodList() {
   const [foodItems, setFoodItems] = useState([]);
   const [filteredFoodItems, setFilteredFoodItems] = useState([]);
   const [searchBarText, setSearchBarText] = useState("");
-  const { orderComplete, setOrderCompleteSemtex } = useCart();
+  const { orderComplete, setThreadsStillProcessing } = useCart();
   //useUpdateLogger(foodItems);
   //useUpdateLogger(filteredFoodItems);
 
@@ -24,7 +24,7 @@ export default function FoodList() {
   useEffect(() => {
     if (orderComplete) {
       handleRefresh();
-      setOrderCompleteSemtex((prev) => prev - 1);
+      setThreadsStillProcessing((prev) => prev - 1);
     }
     return () => {};
   }, [orderComplete]);
@@ -74,7 +74,7 @@ export default function FoodList() {
             borderColor: "#CED0CE",
           }}
         >
-          <ActivityIndicator size="large" color="#0000ff" />
+          <ActivityIndicator size="large" color="#5800A8" />
         </View>
       );
     }

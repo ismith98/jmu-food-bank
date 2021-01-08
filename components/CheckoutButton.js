@@ -6,13 +6,17 @@ import CheckoutModal from "./CheckoutModal";
 
 export default function CheckoutButton() {
   const [modalVisible, setModalVisible] = useState(false);
-  const { orderComplete, setOrderCompleteSemtex } = useCart();
+  const {
+    orderComplete,
+    setThreadsStillProcessing,
+    unprocessedItems,
+  } = useCart();
   const navigation = useNavigation();
 
   useEffect(() => {
-    if (orderComplete) {
-      navigation.navigate("Orders");
-      setOrderCompleteSemtex((prev) => prev - 1);
+    if (orderComplete && unprocessedItems === 0) {
+      navigation.navigate("Reciepts");
+      setThreadsStillProcessing((prev) => prev - 1);
     }
     return () => {};
   }, [orderComplete]);

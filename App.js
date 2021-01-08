@@ -12,7 +12,7 @@ import Homepage from "./pages/Homepage";
 import Cart from "./pages/Cart";
 import { useFonts } from "expo-font";
 import { AppLoading } from "expo";
-import { CartProvider, useCart } from "./contexts/CartContext";
+import { CartProvider } from "./contexts/CartContext";
 import Orders from "./pages/Orders";
 
 const customFonts = {
@@ -45,7 +45,7 @@ export default function App() {
                     return (
                       <Ionicons name="ios-basket" size={size} color={color} />
                     );
-                  case "Orders":
+                  case "Reciepts":
                     return (
                       <MaterialIcons name="receipt" size={size} color={color} />
                     );
@@ -72,7 +72,7 @@ export default function App() {
             }}
           >
             <Tab.Screen name="FAQ" component={Faq} />
-            <Tab.Screen name="Orders" component={Orders} />
+            <Tab.Screen name="Reciepts" component={Orders} />
             <Tab.Screen name="Home" component={Homepage} />
             <Tab.Screen name="Reserve" component={Reserve} />
             <Tab.Screen name="Cart" component={Cart} />

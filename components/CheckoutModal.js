@@ -53,8 +53,9 @@ export default function CheckoutModal({ modalVisible, setModalVisible }) {
     let chosenDate = dates.find((date) => date.isSelected).value;
     chosenDate = chosenDate.hour(hourCounter === 12 ? 12 : 12 + hourCounter);
     chosenDate = chosenDate.minute(minuteCounter);
+    chosenDate = chosenDate.second(0);
     //console.log(`${chosenDate.toString()}`);
-    setPickupDate(chosenDate.toString());
+    setPickupDate(chosenDate.toDate().toString());
   }
 
   function onConfirm() {

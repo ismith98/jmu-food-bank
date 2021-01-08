@@ -21,8 +21,8 @@ export default function WelcomeContent() {
           <Text onPress={gotoReservePage} style={styles.underline}>
             Press reserve
           </Text>{" "}
-          to see the inventory of your local food bank, or to reserve food for
-          pickup
+          to see the inventory of JMU's Pop-up Food Pantry, or to reserve food
+          for pickup
         </Text>
         <Text style={styles.br}>{"\n\n"}</Text>
         <Text onPress={gotoFaqPage} style={styles.underline}>

@@ -50,7 +50,7 @@ export default function CartList() {
                 borderColor: "#CED0CE",
               }}
             >
-              <ActivityIndicator size="large" color="#0000ff" />
+              <ActivityIndicator size="large" color="#5800A8" />
             </View>
           ) : (
             <>
