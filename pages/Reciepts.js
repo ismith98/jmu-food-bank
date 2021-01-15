@@ -4,7 +4,7 @@ import MyHeader from "../components/MyHeader";
 import FoodBackground from "../components/FoodBackground";
 import OrdersList from "../components/OrdersList";
 
-export default function Orders() {
+export default function Reciepts() {
   return (
     <MyHeader title="My Reciepts">
       {/* children appear beneath the header */}
