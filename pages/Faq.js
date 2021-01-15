@@ -1,14 +1,16 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import MyHeader from "../components/MyHeader";
-import GeneralStyles from "../styles/GeneralStyles";
+import FoodBackground from "../components/FoodBackground";
 import FaqList from "../components/FaqList";
 
 export default function Faq({ navigation }) {
   return (
     <MyHeader title={"FAQs"}>
       {/* children appear beneath the header */}
-      <FaqList />
+      <FoodBackground isDark={false}>
+        <FaqList />
+      </FoodBackground>
     </MyHeader>
   );
 }
