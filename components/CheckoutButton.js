@@ -15,7 +15,7 @@ export default function CheckoutButton() {
 
   useEffect(() => {
     if (orderComplete && unprocessedItems === 0) {
-      navigation.navigate("Reciepts");
+      navigation.navigate("Receipts");
       setThreadsStillProcessing((prev) => prev - 1);
     }
     return () => {};

@@ -13,7 +13,7 @@ import Cart from "./pages/Cart";
 import { useFonts } from "expo-font";
 import { AppLoading } from "expo";
 import { CartProvider } from "./contexts/CartContext";
-import Reciepts from "./pages/Reciepts";
+import Receipts from "./pages/Receipts";
 
 const customFonts = {
   RobotoCondensed: require("./fonts/RobotoCondensed-Regular.ttf"),
@@ -45,7 +45,7 @@ export default function App() {
                     return (
                       <Ionicons name="ios-basket" size={size} color={color} />
                     );
-                  case "Reciepts":
+                  case "Receipts":
                     return (
                       <MaterialIcons name="receipt" size={size} color={color} />
                     );
@@ -72,7 +72,7 @@ export default function App() {
             }}
           >
             <Tab.Screen name="FAQ" component={Faq} />
-            <Tab.Screen name="Reciepts" component={Reciepts} />
+            <Tab.Screen name="Receipts" component={Receipts} />
             <Tab.Screen name="Home" component={Homepage} />
             <Tab.Screen name="Reserve" component={Reserve} />
             <Tab.Screen name="Cart" component={Cart} />
