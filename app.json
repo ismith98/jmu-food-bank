@@ -6,14 +6,16 @@
     "orientation": "portrait",
     "icon": "./assets/food-pantry-ios-icon.png",
     "splash": {
-      "image": "./assets/food-pantry-splash.png",
+      "image": "./assets/food-pantry-empty-splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/food-pantry-adaptive-icon.png",

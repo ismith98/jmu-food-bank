@@ -1,11 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Modal,
-  TouchableHighlight,
-} from "react-native";
+import { StyleSheet, Text, View, Modal } from "react-native";
+import Button from "react-native-button";
 import { Ionicons } from "@expo/vector-icons";
 import FoodBackground from "./FoodBackground";
 import ConfirmModal from "./ConfirmModal";
@@ -86,22 +81,22 @@ export default function CheckoutModal({ modalVisible, setModalVisible }) {
                   minuteCounter={minuteCounter}
                   setMinuteCounter={setMinuteCounter}
                 />
-                <TouchableHighlight
-                  style={{ ...styles.button, ...styles.continueButton }}
+
+                <Button
                   onPress={() => {
                     onContinue();
                     setShowConfirmModal(true);
                   }}
+                  style={{ ...styles.button, ...styles.continueButton }}
                 >
-                  <Text style={styles.textStyle}>Continue</Text>
-                </TouchableHighlight>
-
-                <TouchableHighlight
-                  style={{ ...styles.button, ...styles.returnButton }}
+                  Continue
+                </Button>
+                <Button
                   onPress={() => setModalVisible(false)}
+                  style={{ ...styles.button, ...styles.returnButton }}
                 >
-                  <Text style={styles.textStyle}>Go back</Text>
-                </TouchableHighlight>
+                  Go Back
+                </Button>
               </View>
             </FoodBackground>
           </View>
@@ -146,6 +141,10 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
+    color: "white",
+    fontFamily: "Roboto",
+    fontSize: 16,
+    fontWeight: "bold",
   },
   continueButton: {
     backgroundColor: "#5800A8",

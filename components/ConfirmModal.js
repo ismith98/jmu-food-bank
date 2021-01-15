@@ -6,6 +6,7 @@ import {
   Modal,
   TouchableHighlight,
 } from "react-native";
+import Button from "react-native-button";
 import { Ionicons } from "@expo/vector-icons";
 import FoodBackground from "./FoodBackground";
 import PropTypes from "prop-types";
@@ -27,22 +28,21 @@ export default function ConfirmModal({
                 Are you sure you want to continue?
               </Text>
 
-              <TouchableHighlight
-                style={{ ...styles.button, ...styles.deleteButton }}
+              <Button
                 onPress={() => {
                   onConfirm();
-                  setModalVisible(!modalVisible);
+                  setModalVisible(false);
                 }}
+                style={{ ...styles.button, ...styles.deleteButton }}
               >
-                <Text style={styles.textStyle}>{confirmButtonText}</Text>
-              </TouchableHighlight>
-
-              <TouchableHighlight
+                {confirmButtonText}
+              </Button>
+              <Button
+                onPress={() => setModalVisible(false)}
                 style={{ ...styles.button, ...styles.returnButton }}
-                onPress={() => setModalVisible(!modalVisible)}
               >
-                <Text style={styles.textStyle}>Go back</Text>
-              </TouchableHighlight>
+                Go Back
+              </Button>
             </View>
           </FoodBackground>
         </View>
@@ -87,6 +87,10 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
+    color: "white",
+    fontFamily: "Roboto",
+    fontSize: 16,
+    fontWeight: "bold",
   },
   deleteButton: {
     backgroundColor: "#5800A8",
@@ -95,11 +99,7 @@ const styles = StyleSheet.create({
   returnButton: {
     backgroundColor: "#6c757d",
   },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
+
   modalText: {
     marginTop: 5,
     marginBottom: 15,
