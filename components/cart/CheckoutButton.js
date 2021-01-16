@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { useCart } from "../../contexts/CartContext";
-import CheckoutModal from "./modal/CheckoutModal";
+import CheckoutModal from "./checkoutModal/CheckoutModal";
 
 export default function CheckoutButton() {
   const [modalVisible, setModalVisible] = useState(false);
