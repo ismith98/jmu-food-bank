@@ -2,9 +2,9 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import GeneralStyles from "../styles/GeneralStyles";
 import FoodBackground from "../components/FoodBackground";
-import WelcomeContent from "../components/WelcomeContent";
+import WelcomeContent from "../components/home/WelcomeContent";
 
-export default function Homepage() {
+export default function Home() {
   return (
     <View style={GeneralStyles.container}>
       <View style={styles.foodBg}>

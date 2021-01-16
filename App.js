@@ -8,7 +8,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import Faq from "./pages/Faq";
 import Reserve from "./pages/Reserve";
-import Homepage from "./pages/Homepage";
+import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import { useFonts } from "expo-font";
 import { AppLoading } from "expo";
@@ -73,7 +73,7 @@ export default function App() {
           >
             <Tab.Screen name="FAQ" component={Faq} />
             <Tab.Screen name="Receipts" component={Receipts} />
-            <Tab.Screen name="Home" component={Homepage} />
+            <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="Reserve" component={Reserve} />
             <Tab.Screen name="Cart" component={Cart} />
           </Tab.Navigator>
