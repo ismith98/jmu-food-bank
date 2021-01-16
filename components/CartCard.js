@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 import { FontAwesome } from "@expo/vector-icons";
 import { useCart } from "../contexts/CartContext";
 import NumberInput from "./NumberInput";
-import ConfirmModal from "./ConfirmModal";
+import ConfirmModal from "./general/ConfirmModal";
 
 export default function CartCard({ currentItem, index }) {
   const { itemsInCart, setItemsInCart, setCartTotal } = useCart();

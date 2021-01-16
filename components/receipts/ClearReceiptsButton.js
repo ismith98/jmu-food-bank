@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import ConfirmModal from "../ConfirmModal";
+import ConfirmModal from "../general/ConfirmModal";
 
 export default function ClearReceiptsButton({ clearOrders }) {
   const [showModal, setShowModal] = useState(false);
