@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import { useCart } from "../contexts/CartContext";
-import NumberInput from "./NumberInput";
+import { useCart } from "../../contexts/CartContext";
+import NumberInput from "../general/NumberInput";
 
 export default function FoodCard({ currentItem }) {
   const [startingAmount, setStartingAmount] = useState(

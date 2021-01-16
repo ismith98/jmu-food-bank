@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { SearchBar } from "react-native-elements";
-import { useCart } from "../contexts/CartContext";
+import { useCart } from "../../contexts/CartContext";
 import CheckoutButton from "./CheckoutButton";
 import CartCard from "./CartCard";
 

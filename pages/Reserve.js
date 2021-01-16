@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-import FoodList from "../components/FoodList";
+import FoodList from "../components/reserve/FoodList";
 import FoodBackground from "../components/general/FoodBackground";
 import MyHeader from "../components/general/MyHeader";
 

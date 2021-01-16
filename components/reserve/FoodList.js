@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View, FlatList, ActivityIndicator } from "react-native";
 import { SearchBar } from "react-native-elements";
 import FoodCard from "./FoodCard";
-import firebase from "../firebase";
-import useUpdateLogger from "../hooks/useUpdateLogger";
-import { useCart } from "../contexts/CartContext";
+import firebase from "../../firebase";
+import useUpdateLogger from "../../hooks/useUpdateLogger";
+import { useCart } from "../../contexts/CartContext";
 
 export default function FoodList() {
   const [loading, setLoading] = useState(false);

@@ -31,13 +31,13 @@ export default function DateSelector({ dates, setDates }) {
         */}
           <Button
             onPress={() => changeSelected(date)}
+            key={date.label}
             style={[
               date.isSelected
                 ? { backgroundColor: "#5800A8" }
                 : { backgroundColor: "#82888D" },
               styles.button,
             ]}
-            //style={{ ...styles.button, ...styles.returnButton }}
           >
             {date.label}
           </Button>
