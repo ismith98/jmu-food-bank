@@ -6,13 +6,13 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import OrderCard from "./OrderCard";
+import ReceiptCard from "./ReceiptCard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useCart } from "../contexts/CartContext";
-import { useErrorAlert } from "../hooks/useAlert";
-import ClearOrdersButton from "./ClearOrdersButton";
+import { useCart } from "../../contexts/CartContext";
+import { useErrorAlert } from "../../hooks/useAlert";
+import ClearOrdersButton from "../ClearOrdersButton";
 
-export default function OrdersList() {
+export default function ReceiptsList() {
   const { orderComplete, setThreadsStillProcessing } = useCart();
   const [isEmpty, setIsEmpty] = useState(true);
   const [orders, setOrders] = useState([]);
@@ -56,7 +56,7 @@ export default function OrdersList() {
             data={orders}
             keyExtractor={(item) => item.orderId}
             renderItem={({ item, index }) => (
-              <OrderCard order={item} key={index} />
+              <ReceiptCard order={item} key={index} />
             )}
           />
         </>
@@ -79,8 +79,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
-    //height: 100,
-    //backgroundColor: "#EDEDED",
   },
   bg: {
     backgroundColor: "#EDEDED",

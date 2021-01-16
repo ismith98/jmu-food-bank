@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export default function OrderCard({ order }) {
+export default function ReceiptCard({ order }) {
   const [hideDetails, setHideDetails] = useState(true);
   const defaultPickupTime = "mon 12/9/2020";
   return (
