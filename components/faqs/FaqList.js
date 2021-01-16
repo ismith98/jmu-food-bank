@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { SearchBar } from "react-native-elements";
 import FaqCard from "./FaqCard";
-import Faqs from "../assets/Faqs.json";
+import Faqs from "../../assets/Faqs.json";
 
 export default function FaqList() {
   const faqs = Faqs;
