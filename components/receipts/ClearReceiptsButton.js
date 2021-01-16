@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import ConfirmModal from "./ConfirmModal";
+import ConfirmModal from "../ConfirmModal";
 
-export default function ClearOrdersButton({ clearOrders }) {
+export default function ClearReceiptsButton({ clearOrders }) {
   const [showModal, setShowModal] = useState(false);
   return (
     <>
@@ -16,7 +16,7 @@ export default function ClearOrdersButton({ clearOrders }) {
         modalVisible={showModal}
         setModalVisible={setShowModal}
         onConfirm={clearOrders}
-        confirmButtonText="Delete your records of orders (Does not cancel the orders)"
+        confirmButtonText="Delete the receipts from your device (Does not cancel the orders)"
       />
     </>
   );

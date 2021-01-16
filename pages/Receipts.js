@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import MyHeader from "../components/MyHeader";
-import FoodBackground from "../components/FoodBackground";
+import MyHeader from "../components/general/MyHeader";
+import FoodBackground from "../components/general/FoodBackground";
 import ReceiptsList from "../components/receipts/ReceiptsList";
 
 export default function Receipts() {

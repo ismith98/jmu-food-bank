@@ -10,7 +10,7 @@ import ReceiptCard from "./ReceiptCard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCart } from "../../contexts/CartContext";
 import { useErrorAlert } from "../../hooks/useAlert";
-import ClearOrdersButton from "../ClearOrdersButton";
+import ClearReceiptsButton from "./ClearReceiptsButton";
 
 export default function ReceiptsList() {
   const { orderComplete, setThreadsStillProcessing } = useCart();
@@ -69,7 +69,7 @@ export default function ReceiptsList() {
           </View>
         </View>
       )}
-      <ClearOrdersButton clearOrders={clearOrders} />
+      <ClearReceiptsButton clearOrders={clearOrders} />
     </View>
   );
 }

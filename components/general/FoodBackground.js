@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View, ImageBackground } from "react-native";
-import darkBackground from "../assets/background.png";
-import lightBackground from "../assets/lightBackground.png";
-import GeneralStyles from "../styles/GeneralStyles";
+import darkBackground from "../../assets/background.png";
+import lightBackground from "../../assets/lightBackground.png";
+import GeneralStyles from "../../styles/GeneralStyles";
 
 export default function FoodBackground({
   isDark = true,

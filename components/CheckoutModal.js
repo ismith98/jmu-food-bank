@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { StyleSheet, Text, View, Modal } from "react-native";
 import Button from "react-native-button";
 import { Ionicons } from "@expo/vector-icons";
-import FoodBackground from "./FoodBackground";
+import FoodBackground from "./general/FoodBackground";
 import ConfirmModal from "./ConfirmModal";
 import { useCart } from "../contexts/CartContext";
 import usePickupTimes from "../hooks/usePickupTimes";

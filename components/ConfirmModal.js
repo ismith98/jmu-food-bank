@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import Button from "react-native-button";
 import { Ionicons } from "@expo/vector-icons";
-import FoodBackground from "./FoodBackground";
+import FoodBackground from "./general/FoodBackground";
 import PropTypes from "prop-types";
 
 export default function ConfirmModal({

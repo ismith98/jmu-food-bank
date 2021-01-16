@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import CartList from "../components/CartList";
-import FoodBackground from "../components/FoodBackground";
-import MyHeader from "../components/MyHeader";
+import FoodBackground from "../components/general/FoodBackground";
+import MyHeader from "../components/general/MyHeader";
 import { useCart } from "../contexts/CartContext";
 
 export default function Cart({ navigation }) {
